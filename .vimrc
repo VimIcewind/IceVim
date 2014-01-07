@@ -1,4 +1,4 @@
-"Last Modified: 2014-01-06 18:29:54
+"Last Modified: 2014-01-21 23:07:38
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -805,7 +805,7 @@ nmap <leader>4 :set filetype=php<CR>
 :command TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SYNC :w! G:/TDDownload/.vimrc |:w! G:/百度云/我的配置/vimrc |:update
+:command SYNC :w! G:/TDDownload/.vimrc |:w! G:/百度云/我的配置/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
