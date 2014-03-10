@@ -1,4 +1,4 @@
-"Last Modified: 2014-03-07 17:30:52
+"Last Modified: 2014-03-09 23:21:40
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -139,8 +139,8 @@ set wildmenu
 "显示未完成的命令
 set showcmd
 "在编辑过程中，在右下角显示光标位置的状态行
-set ruler
-"由于使用了powerline插件，故不在底行显示当前所处的模式
+"set ruler
+"由于使用了airline插件，故不在底行显示当前所处的模式
 set noshowmode
 "光标所在的行出现一条淡色的线，更容易找到光标的所在位置
 "set cursorline
