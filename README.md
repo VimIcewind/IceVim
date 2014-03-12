@@ -7,7 +7,7 @@ If you want use it in Linux, you need rename it like this:
 cd ~
 git clone https://github.com/VimIcewind/IceVim.git IceVim
 cd IceVim
-mv vimfiles/ .vimrc  ~
+mv vimfiles/.vimrc  ~
 cd ~
 mv vimfiles/ .vim
 rm -rf IceVim
