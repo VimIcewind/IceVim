@@ -1,4 +1,4 @@
-"Last Modified: 2014-03-11 13:52:15
+"Last Modified: 2014-04-14 17:01:50
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -18,11 +18,11 @@ endfunc
 if has('gui_running')
     "设置GUI窗口位置
     if MySys() == "Windows"
-        "winpos 353 120
-        winpos 630 280
+        winpos 353 120
+        "winpos 630 280
     elseif MySys() == "Linux"
-        "winpos 360 150
-        winpos 636 280
+        winpos 360 150
+        "winpos 636 280
     endif
     "设置GUI窗口的大小
     set lines=25
@@ -212,6 +212,24 @@ endif
 ""设置缩进和Tab
 set sw=8 sts=8 ts=8 smarttab
 set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
+"Longline Linux 风格缩进
+func! LL()
+    " 设定缩进时的宽度为8
+    set shiftwidth=8
+    " 使得按退格键时可以一次删掉8个空格
+    set softtabstop=8
+    " 设定tab长度为8
+    set tabstop=8
+    " 不将tab用空格替换
+    set noexpandtab
+    " 将空格用tab替换
+    set smarttab
+    " 设定 Vim 来如何进行缩进
+    set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
+    " 格式化代码
+    exec "%!indent\ -linux -l256"
+    exec "normal G"
+endfunc
 "Linux 风格缩进
 func! LT()
     " 设定缩进时的宽度为8
@@ -675,12 +693,12 @@ autocmd BufEnter *.pc set filetype=esqlc
 if has('gui_running')
     "调整窗口大小
     if MySys() == "Windows"
-        ":command Long :set lines=36 columns=80 | winpos 353 35 | :normal =
-        ":command Short :set lines=25 columns=80 | winpos 353 120 | :normal =
-        ":command Middle :set lines=36 columns=115 | winpos 213 35 | :normal =
-        :command Long :set lines=36 columns=80 | winpos 630 164 | :normal =
-        :command Short :set lines=25 columns=80 | winpos 630 280 | :normal =
-        :command Middle :set lines=36 columns=115 | winpos 487 164 | :normal =
+        :command Long :set lines=36 columns=80 | winpos 353 35 | :normal =
+        :command Short :set lines=25 columns=80 | winpos 353 120 | :normal =
+        :command Middle :set lines=36 columns=115 | winpos 213 35 | :normal =
+        ":command Long :set lines=36 columns=80 | winpos 630 164 | :normal =
+        ":command Short :set lines=25 columns=80 | winpos 630 280 | :normal =
+        ":command Middle :set lines=36 columns=115 | winpos 487 164 | :normal =
         :command Big :set lines=53 columns=237 | winpos 2 30 | :normal =
     elseif MySys() == "Linux"
         :command Long :set lines=40 columns=80 | winpos 360 35
@@ -758,6 +776,8 @@ map g=2 :set sw=2 sts=2 ts=8 expandtab<CR>
 map g=4 :set sw=4 sts=4 ts=4 expandtab<CR>
 "8格缩进
 map g=8 :set sw=8 sts=8 ts=8 smarttab<CR>
+"Longline Linux缩进风格 g==
+map g== :call LL()<CR>v<Esc>
 "Linux缩进风格 g=l
 map g=l :call LT()<CR>v<Esc>
 "K&R缩进风格 g=k
@@ -927,5 +947,5 @@ map <F2> <Esc>:NERDTreeToggle<CR>
 imap <F2> <C-O>NERDTreeToggle<CR>
 map <F3> <Esc>:TlistToggle<CR>
 imap <F3> <C-O>:TlistToggle<CR>
-map <F4> <Esc>:WMToggle<CR>
-imap <F4> <C-O>:WMToggle<CR>
+map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
+imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
