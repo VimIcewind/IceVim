@@ -1,4 +1,4 @@
-"Last Modified: 2014-04-15 14:00:33
+"Last Modified: 2014-04-15 16:02:52
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -881,6 +881,8 @@ elseif MySys() == "Linux"
     set path+=/usr/include/
 endif
 
+"当有多个同名函数时，显示选项
+noremap <C-]> g<C-]>
 "在当前目录找不到tags文件时请到上层目录查找
 set tags=tags;/
 "如果觉得到处放置tags文件不好，可以设置tags目录
