@@ -1,4 +1,4 @@
-"Last Modified: 2014-04-15 09:11:10
+"Last Modified: 2014-04-15 09:30:51
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -182,9 +182,10 @@ if has("autocmd")
     autocmd VimResized * normal =
 endif
 
-"开启折叠
+"设置折叠
 if has("syntax")
-    set foldenable
+    "默认不折叠
+    set foldenable!
     "用缩进来定义折叠
     set foldmethod=indent
     "设定折叠的最大嵌套层数为1，仅用于"indent"和"syntax"折叠
@@ -193,8 +194,6 @@ if has("syntax")
     set foldopen=hor
     "设置为自动关闭折叠
     "set foldclose=all
-    "默认不折叠
-    norm zn
 endif
 
 "让TOhtml产生有CSS语法的html
