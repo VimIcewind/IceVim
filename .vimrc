@@ -1,4 +1,4 @@
-"Last Modified: 2014-04-14 17:01:50
+"Last Modified: 2014-04-15 09:11:10
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -214,112 +214,111 @@ set sw=8 sts=8 ts=8 smarttab
 set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
 "Longline Linux 风格缩进
 func! LL()
-    " 设定缩进时的宽度为8
+    "设定缩进时的宽度为8
     set shiftwidth=8
-    " 使得按退格键时可以一次删掉8个空格
+    "使得按退格键时可以一次删掉8个空格
     set softtabstop=8
-    " 设定tab长度为8
+    "设定tab长度为8
     set tabstop=8
-    " 不将tab用空格替换
+    "不将tab用空格替换
     set noexpandtab
-    " 将空格用tab替换
+    "将空格用tab替换
     set smarttab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码
+    "格式化代码
     exec "%!indent\ -linux -l256"
-    exec "normal G"
 endfunc
 "Linux 风格缩进
 func! LT()
-    " 设定缩进时的宽度为8
+    "设定缩进时的宽度为8
     set shiftwidth=8
-    " 使得按退格键时可以一次删掉8个空格
+    "使得按退格键时可以一次删掉8个空格
     set softtabstop=8
-    " 设定tab长度为8
+    "设定tab长度为8
     set tabstop=8
-    " 不将tab用空格替换
+    "不将tab用空格替换
     set noexpandtab
-    " 将空格用tab替换
+    "将空格用tab替换
     set smarttab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码
+    "格式化代码
     exec "%!indent\ -linux"
     exec "normal G"
 endfunc
 "K&R 风格缩进
 func! KR()
-    " 设定缩进时的宽度为4
+    "设定缩进时的宽度为4
     set shiftwidth=4
-    " 使得按退格键时可以一次删掉4个空格
+    "使得按退格键时可以一次删掉4个空格
     set softtabstop=4
-    " 设定tab长度为8
+    "设定tab长度为8
     set tabstop=8
-    " 将tab用空格替换
+    "将tab用空格替换
     set expandtab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L2,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码
+    "格式化代码
     exec "%!indent\ -kr -nut"
     exec "normal G"
 endfunc
 "MS 风格缩进
 func! MS()
-    " 设定缩进时的宽度为4
+    "设定缩进时的宽度为4
     set shiftwidth=4
-    " 使得按退格键时可以一次删掉4个空格
+    "使得按退格键时可以一次删掉4个空格
     set softtabstop=4
-    " 设定tab长度为8
+    "设定tab长度为8
     set tabstop=8
-    " 将tab用空格替换
+    "将tab用空格替换
     set expandtab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L2,:s,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码
+    "格式化代码
     exec "%!indent\ -kr\ -bl\ -bli0\ -cli4 -nut"
     exec "normal G"
 endfunc
 "GNU 风格缩进
 func! GNU()
-    " 设定缩进时的宽度为2
+    "设定缩进时的宽度为2
     set shiftwidth=2
-    " 使得按退格键时可以一次删掉2个空格
+    "使得按退格键时可以一次删掉2个空格
     set softtabstop=2
-    " 设定tab长度为8
+    "设定tab长度为8
     set tabstop=8
-    " 将tab用空格替换
+    "将tab用空格替换
     set expandtab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{s,}0,^0,:0,L-1,=s,l0,b0,gs,hs,p5,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码
+    "格式化代码
     exec "%!indent"
     exec "normal G"
 endfunc
 "Java Eclipse风格缩进
 func! JE()
-    " 设定缩进时的宽度为4
+    "设定缩进时的宽度为4
     set shiftwidth=4
-    " 使得按退格键时可以一次删掉4个空格
+    "使得按退格键时可以一次删掉4个空格
     set softtabstop=4
-    " 设定tab长度为4
+    "设定tab长度为4
     set tabstop=4
-    " 不将tab用空格替换
+    "不将tab用空格替换
     set noexpandtab
-    " 将空格用tab替换
+    "将空格用tab替换
     set smarttab
-    " 设定 Vim 来如何进行缩进
+    "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
-    " 格式化代码 用4个空格缩进
+    "格式化代码 用4个空格缩进
     exec "%!astyle\ -A2 -I -U -Y -L -p -H -k3 -q"
-    " 格式化代码 用tab缩进
+    "格式化代码 用tab缩进
     "exec "%!astyle\ -A2 -I -U -Y -T4 -L -p -H -k3 -q"
     exec "normal G"
 endfunc
 "DS 去行尾空格
 func! DS()
     if search('\s\+$', 'pw') > 0
-        " 去掉行尾空格
+        "去掉行尾空格
         exec "%s/\\s\\+$//"
     endif
 endfunc
