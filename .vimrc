@@ -1,4 +1,4 @@
-"Last Modified: 2014-04-18 18:16:48
+"Last Modified: 2014-04-19 13:30:52
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -226,6 +226,7 @@ func! LL()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码
+    exec "normal =G"
     exec "%!indent\ -linux\ -l256"
     "用g/indent.*\_s$/norm 2dd去掉indent的Warning
     exec "g\/indent\.\*\\_s\$\/norm 2dd"
@@ -246,6 +247,7 @@ func! LT()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码
+    exec "normal =G"
     exec "%!indent\ -linux"
     exec "normal G"
 endfunc
@@ -262,6 +264,7 @@ func! KR()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L2,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码
+    exec "normal =G"
     exec "%!indent\ -kr -nut"
     exec "normal G"
 endfunc
@@ -278,6 +281,7 @@ func! MS()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L2,:s,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码
+    exec "normal =G"
     exec "%!indent\ -kr\ -bl\ -bli0\ -cli4 -nut"
     exec "normal G"
 endfunc
@@ -294,6 +298,7 @@ func! GNU()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{s,}0,^0,:0,L-1,=s,l0,b0,gs,hs,p5,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码
+    exec "normal =G"
     exec "%!indent"
     exec "normal G"
 endfunc
@@ -312,6 +317,7 @@ func! JE()
     "设定 Vim 来如何进行缩进
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码 用4个空格缩进
+    exec "normal =G"
     exec "%!astyle\ -A2 -I -U -Y -L -p -H -k3 -q"
     "格式化代码 用tab缩进
     "exec "%!astyle\ -A2 -I -U -Y -T4 -L -p -H -k3 -q"
@@ -830,7 +836,7 @@ nmap <leader>4 :set filetype=php<CR>
 :command TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SYNC :w! G:/TDDownload/.vimrc |:w! G:/百度云/我的配置/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
+:command SC :w! G:/TDDownload/.vimrc |:w! G:/百度云/我的配置/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
@@ -881,7 +887,7 @@ elseif MySys() == "Linux"
     set path+=/usr/include/
 endif
 
-"当有多个同名函数时，显示选项
+"当有多个同名函数时，需要选择
 noremap <C-]> g<C-]>
 "在当前目录找不到tags文件时请到上层目录查找
 set tags=tags;/
@@ -902,7 +908,7 @@ endif
 ""插件的设置
 "---------- Taglist.vim [显示程序中的宏定义、变量、函数、类] ----------
 let Tlist_GainFocus_On_ToggleOpen=0
-let Tlist_WinWidth=30
+let Tlist_WinWidth=34
 let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Enable_Fold_Column=0
@@ -910,6 +916,7 @@ let Tlist_Inc_Winwidth=0
 
 "---------- WinManager.vim [窗口管理] ----------
 let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:winManagerWidth=34
 
 "--------------------Cscope设置--------------------
 if filereadable("cscope.out")
@@ -948,7 +955,7 @@ let g:user_zen_leader_key = '<C-_>'
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
 imap <F2> <C-O>NERDTreeToggle<CR>
-map <F3> <Esc>:TlistToggle<CR>
-imap <F3> <C-O>:TlistToggle<CR>
+map <F3> <Esc>:TlistToggle<CR>:set nu!<CR>
+imap <F3> <C-O>:TlistToggle<CR>:set nu!<CR>
 map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
 imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
