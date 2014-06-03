@@ -9,7 +9,7 @@ IceVim
 
 3. The .vim is using in Linux.
 
-    If you want use it in Linux, you need rename it like this: 
+    If you want use it in Linux, you need rename it like this:
 
   cd ~
   mv .vimrc .vimrc.bak
