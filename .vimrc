@@ -1,4 +1,4 @@
-"Last Modified: 2014-06-03 23:19:40
+"Last Modified: 2015-01-05 15:38:50
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -170,7 +170,7 @@ set smartindent
 set showmatch
 set matchtime=2
 "设置光标超过 78 列的时候折行
-set textwidth=78
+"set textwidth=78
 "防止特殊符号无法正常显示
 set ambiwidth=double
 "显示最多行，不显示多行的@
@@ -328,6 +328,13 @@ func! DS()
     if search('\s\+$', 'pw') > 0
         "去掉行尾空格
         exec "%s/\\s\\+$//"
+    endif
+endfunc
+"TS 将Tab转换为8个空格
+func! TS()
+    if search('\t', 'pw') > 0
+        "将Tab转换为8个空格
+        exec "%s/\\t/        /g"
     endif
 endfunc
 
@@ -797,6 +804,8 @@ map g=g :call GNU()<CR>v<Esc>
 map g=j :call JE()<CR>v<Esc>
 "DS去掉尾空 g=d
 map g=d :call DS()<CR>v<Esc>
+"TS将行首Tab转换为8个空格 g=s
+map g=s :call TS()<CR>v<Esc>
 
 func! MAP()
     " gc 保存、编译
@@ -836,7 +845,7 @@ nmap <leader>4 :set filetype=php<CR>
 :command TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
+:command SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置文件/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
@@ -889,6 +898,7 @@ endif
 
 "当有多个同名函数时，需要选择
 noremap <C-]> g<C-]>
+"生成 tags命令: ctags -R --langmap=c:.c.pc .
 "在当前目录找不到tags文件时请到上层目录查找
 set tags=tags;/
 "如果觉得到处放置tags文件不好，可以设置tags目录
@@ -919,6 +929,7 @@ let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:winManagerWidth=34
 
 "--------------------Cscope设置--------------------
+"生成cscope.out命令: cscope -Rbkq
 if filereadable("cscope.out")
     cs add cscope.out
 elseif $CSCOPE_DB != ""
