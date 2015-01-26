@@ -1,4 +1,4 @@
-"Last Modified: 2015-01-05 15:38:50
+"Last Modified: 2015-01-26 15:37:43
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -121,7 +121,8 @@ endfunction
 "set iskeyword=@,48-57,_,.
 "编辑一个文件时，直接用相应类型的iskeyword
 if has("autocmd")
-    autocmd FileType c,cpp set iskeyword=@,48-57,_,.,-,>
+    "autocmd FileType c,cpp set iskeyword=@,48-57,_,.,-,>
+    autocmd FileType c,cpp set iskeyword=@,48-57,_
 endif
 
 "历史记录数
@@ -497,6 +498,7 @@ func! RunJava()
     else
         "exec "!java %<"
         "exec "!start java %<"
+        "exec "!start cmd /K \"java %<\""
         exec "!start cmd /C \"java %< && pause\""
     endif
 endfunc
@@ -900,7 +902,7 @@ endif
 noremap <C-]> g<C-]>
 "生成 tags命令: ctags -R --langmap=c:.c.pc .
 "在当前目录找不到tags文件时请到上层目录查找
-set tags=tags;/
+set tags=tags;/,.tags;/
 "如果觉得到处放置tags文件不好，可以设置tags目录
 "if MySys() == "Windows"
 "    set tags=$Vim\tags
