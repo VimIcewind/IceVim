@@ -1,4 +1,4 @@
-"Last Modified: 2015-05-04 15:47:17
+"Last Modified: 2015-05-04 17:18:59
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -689,7 +689,9 @@ endfunc
 if MySys() == "Windows"
     if has("autocmd")
         autocmd filetype make :command! -nargs=? Run :exe "normal gg/:<cr>:noh<cr>b"|:exe "!.\\".expand('<cfile>')." <args>"
-        autocmd filetype c,cpp :command! -nargs=? Run :exe "!.\\".expand("%<")." <args>"
+        "autocmd filetype c,cpp :command! -nargs=? Run :exe "!.\\".expand("%<")." <args>"
+        autocmd filetype c,cpp :command! -nargs=? Run :exe "!start cmd /C \".%<"." <args>"." && pause\""
+        autocmd filetype java :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && dir "." && pause\""
         autocmd filetype python  :command! -nargs=? Run :!python % <args>
         autocmd filetype htm,html,xhtml :command! Run :!%
     endif
@@ -706,9 +708,11 @@ if has("autocmd")
 endif
 func! SetJavaRunType()
     if search('^\s*package\s\+.*;$', 'pw') == 0
-        :command! -nargs=? Run :!java %< <args>
+        ":command! -nargs=? Run :!java %< <args>
+        :command! -nargs=? Run :exe "!start cmd /C \"java %< && pause\""
     else
-        :command! -nargs=? Run :exe "normal gg/package/s+8<CR>:noh<CR>"|:exe "!java ".expand('<cfile>').".%< <args>"
+        ":command! -nargs=? Run :exe "normal gg/package/s+8<CR>:noh<CR>"|:exe "!java ".expand('<cfile>').".%< <args>"
+        :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
     endif
 endfunc
 autocmd BufEnter *.pc set filetype=esqlc
