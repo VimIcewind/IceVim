@@ -1,4 +1,4 @@
-"Last Modified: 2015-05-04 15:29:26
+"Last Modified: 2015-05-04 15:47:17
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -360,8 +360,11 @@ endfunc
 "编译java源文件
 func! CompileJava()
     exec "update"
-    "set makeprg=javac\ -g\ -d\ .\ %
-    set makeprg=javac\ -g\ -d\ ..\ %
+    if search('^\s*package\s\+.*;$', 'pw') > 0
+        set makeprg=javac\ -g\ -d\ ..\ %
+    else
+        set makeprg=javac\ -g\ -d\ .\ %
+    endif
     exec "make"
     set makeprg=make
 endfunc
@@ -424,7 +427,11 @@ endfunc
 "编译Java源文件
 func! ReleaseCompileJava()
     exec "update"
-    set makeprg=javac\ -d\ .\ %
+    if search('^\s*package\s\+.*;$', 'pw') > 0
+        set makeprg=javac\ -d\ ..\ %
+    else
+        set makeprg=javac\ -d\ .\ %
+    endif
     exec "make"
     set makeprg=make
 endfunc
