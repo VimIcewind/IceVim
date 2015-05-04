@@ -1,4 +1,4 @@
-"Last Modified: 2015-01-26 15:37:43
+"Last Modified: 2015-05-04 15:29:26
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -360,7 +360,8 @@ endfunc
 "编译java源文件
 func! CompileJava()
     exec "update"
-    set makeprg=javac\ -g\ -d\ .\ %
+    "set makeprg=javac\ -g\ -d\ .\ %
+    set makeprg=javac\ -g\ -d\ ..\ %
     exec "make"
     set makeprg=make
 endfunc
@@ -493,7 +494,8 @@ func! RunJava()
     if search('^\s*package\s\+.*;$', 'pw') > 0
         "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
         "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
-        exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
+        "exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
+        exec "norm gg/package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
         exec "norm gg"
     else
         "exec "!java %<"
