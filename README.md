@@ -1,4 +1,4 @@
-IceVim
+IceVim by VimIcewind@gmail.com
 ================================================================================
 1. The .vimrc  is using in both Windows and Linux.
 
