@@ -1,4 +1,4 @@
-"Last Modified: 2015-05-04 17:18:59
+"Last Modified: 2015-06-29 13:21:37
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -49,6 +49,17 @@ if has('gui_running')
     "设置默认的当前目录为用户家目录
     cd ~
 endif
+
+"窗口最大化
+"if has('win32')
+"    au GUIEnter * simalt ~x
+"else
+"    au GUIEnter * call MaximizeWindow()
+"endif
+"
+"function! MaximizeWindow()
+"    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+"endfunction
 
 "自动切换当前目录为当前文件所在的目录
 if exists("+autochdir")
@@ -205,8 +216,13 @@ if has("autocmd")
     autocmd FileType c,cpp,make set sw=8 sts=8 ts=8 smarttab
     autocmd FileType java set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType htm,html,xhtml,xml set sw=2 sts=2 ts=8 expandtab
+    autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=8 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
+endif
+
+"编辑一个文件时，直接用相应的折叠风格
+if has("autocmd")
+    autocmd FileType htm,html,xhtml,xml,jsp set foldnestmax=16
 endif
 
 ""设置缩进和Tab
@@ -851,7 +867,8 @@ endif
 nmap <leader>1 :set filetype=xhtml<CR>
 nmap <leader>2 :set filetype=css<CR>
 nmap <leader>3 :set filetype=javascript<CR>
-nmap <leader>4 :set filetype=php<CR>
+nmap <leader>4 :set filetype=jsp<CR>
+nmap <leader>5 :set filetype=php<CR>
 
 "":TOhtml的衍生版, :TH, :TW
 "修改默认的网页编码为UTF-8
@@ -865,10 +882,10 @@ nmap <leader>4 :set filetype=php<CR>
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
 "时候会变得非常方便.
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
+"nnoremap <C-H> <C-W>h
+"nnoremap <C-J> <C-W>j
+"nnoremap <C-K> <C-W>k
+"nnoremap <C-L> <C-W>l
 
 "在插入模式下，输入Ctrl_L代替Delete
 "inoremap <C-L> <Del>
@@ -976,6 +993,7 @@ nnoremap gB :bNext<CR>
 map <C-Q> <plug>NERDCommenterToggle
 
 "------------------ZenCoding设置------------------
+"<C-_>,
 let g:user_zen_leader_key = '<C-_>'
 
 ""插件的快捷键设置
@@ -985,3 +1003,4 @@ map <F3> <Esc>:TlistToggle<CR>:set nu!<CR>
 imap <F3> <C-O>:TlistToggle<CR>:set nu!<CR>
 map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
 imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
+
