@@ -1,4 +1,4 @@
-"Last Modified: 2015-06-29 13:21:37
+"Last Modified: 2015-07-14 15:22:19
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -345,6 +345,7 @@ func! DS()
     if search('\s\+$', 'pw') > 0
         "去掉行尾空格
         exec "%s/\\s\\+$//"
+        exec "update"
     endif
 endfunc
 "TS 将Tab转换为8个空格
@@ -1003,4 +1004,3 @@ map <F3> <Esc>:TlistToggle<CR>:set nu!<CR>
 imap <F3> <C-O>:TlistToggle<CR>:set nu!<CR>
 map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
 imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
-
