@@ -1,4 +1,4 @@
-"Last Modified: 2015-07-14 15:22:19
+"Last Modified: 2015-07-15 08:23:33
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -515,17 +515,27 @@ endfunc
 
 "运行java类文件
 func! RunJava()
-    if search('^\s*package\s\+.*;$', 'pw') > 0
-        "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
-        "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
-        "exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
-        exec "norm gg/package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
-        exec "norm gg"
-    else
-        "exec "!java %<"
-        "exec "!start java %<"
-        "exec "!start cmd /K \"java %<\""
-        exec "!start cmd /C \"java %< && pause\""
+    if MySys() == "Windows"
+        if search('^\s*package\s\+.*;$', 'pw') > 0
+            "exec "norm gg/package/s+8^M" | exec "!java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/package/s+8^M" | exec "!start java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/package/s+8^M" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg/package/s+8^M" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg"
+        else
+            "exec "!java %<"
+            "exec "!start java %<"
+            "exec "!start cmd /K \"java %<\""
+            exec "!start cmd /C \"java %< && pause\""
+        endif
+    elseif MySys() == "Linux"
+        if search('^\s*package\s\+.*;$', 'pw') > 0
+            "exec "norm gg/package/s+8^M" | exec "!java " . expand('<cfile>') . ".%<"
+            exec "norm gg/package/s+8^M" | exec "!cd .. && java ".expand('<cfile>').".%<"
+            exec "norm gg"
+        else
+            exec "!java %<"
+        endif
     endif
 endfunc
 
@@ -878,7 +888,7 @@ nmap <leader>5 :set filetype=php<CR>
 :command TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置文件/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
+:command SC :w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
