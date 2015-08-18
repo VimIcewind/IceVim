@@ -1,4 +1,4 @@
-"Last Modified: 2015-08-18 19:01:27
+"Last Modified: 2015-08-18 19:04:12
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1004,7 +1004,7 @@ nnoremap gB :bNext<CR>
 map <C-Q> <plug>NERDCommenterToggle
 
 "------------------ZenCoding设置------------------
-"<C-_>,
+"<C-\>,
 let g:user_zen_leader_key = '<C-\>'
 
 ""插件的快捷键设置
