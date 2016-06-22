@@ -1,4 +1,4 @@
-"Last Modified: 2015-08-18 20:15:38
+"Last Modified: 2016-02-02 16:13:42
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -155,7 +155,7 @@ set showcmd
 "由于使用了airline插件，故不在底行显示当前所处的模式
 set noshowmode
 "光标所在的行出现一条淡色的线，更容易找到光标的所在位置
-"set cursorline
+set cursorline
 
 "语法高亮
 syntax enable
@@ -517,10 +517,10 @@ endfunc
 func! RunJava()
     if MySys() == "Windows"
         if search('^\s*package\s\+.*;$', 'pw') > 0
-            "exec "norm gg/package/s+8^M" | exec "!java " . expand('<cfile>') . ".%<"
-            "exec "norm gg/package/s+8^M" | exec "!start java " . expand('<cfile>') . ".%<"
-            "exec "norm gg/package/s+8^M" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
-            exec "norm gg/package/s+8^M" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
+            "exec "norm gg/^\s*package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/^\s*package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/^\s*package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg/^\s*package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
             exec "norm gg"
         else
             "exec "!java %<"
@@ -530,8 +530,8 @@ func! RunJava()
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') > 0
-            "exec "norm gg/package/s+8^M" | exec "!java " . expand('<cfile>') . ".%<"
-            exec "norm gg/package/s+8^M" | exec "!cd .. && java ".expand('<cfile>').".%<"
+            "exec "norm gg/^package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
+            exec "norm gg/^package/s+8" | exec "!cd .. && java ".expand('<cfile>').".%<"
             exec "norm gg"
         else
             exec "!java %<"
