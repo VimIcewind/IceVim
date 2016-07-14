@@ -1,8 +1,8 @@
 IceVim
 -------------------------------------------------------------------------------
-1. The .vimrc  is using in both Windows and Linux.
+1. The .vimrc  is used in both Windows and Linux.
 
-2. The vimfiles is using in Windows.
+2. The vimfiles is used in Windows.
 
     You may need to change your vimpath in .vimrc if your vimpath is not
   "E:\vim" in Windows.
