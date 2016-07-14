@@ -1,5 +1,5 @@
-IceVim by VimIcewind@gmail.com
-================================================================================
+IceVim
+-------------------------------------------------------------------------------
 1. The .vimrc  is using in both Windows and Linux.
 
 2. The vimfiles is using in Windows.
@@ -11,13 +11,13 @@ IceVim by VimIcewind@gmail.com
 
     If you want use it in Linux, you need rename it like this:
 
-  cd ~
-  mv .vimrc .vimrc.bak
-  mv .vim .vim.bak
-  git clone https://github.com/VimIcewind/IceVim.git IceVim
-  cd IceVim
-  mv .vim/ .vimrc  ~
-  cd ~
+  * cd ~
+  * mv .vimrc .vimrc.bak
+  * mv .vim .vim.bak
+  * git clone https://github.com/VimIcewind/IceVim.git IceVim
+  * cd IceVim
+  * mv .vim/ .vimrc  ~
+  * cd ~
 
 4. By the way, you need to install ctags, indent, gcc, gdb, make and so on,
   or you may get some error messages.
