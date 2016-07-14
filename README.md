@@ -7,7 +7,7 @@ IceVim
     You may need to change your vimpath in .vimrc if your vimpath is not
   "E:\vim" in Windows.
 
-3. The .vim is using in Linux.
+3. The .vim is used in Linux.
 
     If you want use it in Linux, you need rename it like this:
 
