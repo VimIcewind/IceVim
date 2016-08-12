@@ -1,4 +1,4 @@
-"Last Modified: 2016-08-12 08:45:37
+"Last Modified: 2016-08-12 15:09:55
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -851,8 +851,6 @@ map g=2 :set sw=2 sts=2 ts=8 expandtab<CR>
 map g=4 :set sw=4 sts=4 ts=4 expandtab<CR>
 "8格缩进
 map g=8 :set sw=8 sts=8 ts=8 smarttab<CR>
-"Longline Linux缩进风格 g==
-map g== :call LL()<CR>v<Esc>
 "Linux缩进风格 g=l
 map g=l :call LT()<CR>v<Esc>
 "K&R缩进风格 g=k
@@ -867,6 +865,18 @@ map g=j :call JE()<CR>v<Esc>
 map g=d :call DS()<CR>v<Esc>
 "TS将行首Tab转换为8个空格 g=s
 map g=s :call TS()<CR>v<Esc>
+
+"格式化代码 g==
+map g== :call FF()<CR>v<Esc>
+func FF()
+    if &filetype == "c"
+        exec "call LL()"
+    elseif &filetype == "java"
+        exec "call JE()"
+    elseif &filetype == "go"
+        exec "call GO()"
+    endif
+endfunc
 
 func! MAP()
     " gc 保存、编译
