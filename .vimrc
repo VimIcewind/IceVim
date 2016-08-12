@@ -1,4 +1,4 @@
-"Last Modified: 2016-08-12 15:09:55
+"Last Modified: 2016-08-12 15:20:20
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -213,7 +213,7 @@ let html_use_css=1
 
 "编辑一个文件时，直接用相应的缩进风格
 if has("autocmd")
-    autocmd FileType c,cpp,make set sw=8 sts=8 ts=8 smarttab
+    autocmd FileType c,cpp,go,make set sw=8 sts=8 ts=8 smarttab
     autocmd FileType java set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=8 expandtab
@@ -747,7 +747,7 @@ elseif MySys() == "Linux"
         autocmd filetype c,cpp :command! -nargs=? Run :!./%< <args>
         autocmd filetype python  :command! -nargs=? Run :!python % <args>
         autocmd filetype htm,html,xhtml :command! Run :!firefox %
-    endi"f
+    endif
 endif
 if has("autocmd")
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
