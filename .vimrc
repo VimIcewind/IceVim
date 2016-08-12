@@ -1,4 +1,4 @@
-"Last Modified: 2016-02-02 16:13:42
+"Last Modified: 2016-08-12 08:45:37
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -155,7 +155,7 @@ set showcmd
 "由于使用了airline插件，故不在底行显示当前所处的模式
 set noshowmode
 "光标所在的行出现一条淡色的线，更容易找到光标的所在位置
-set cursorline
+"set cursorline
 
 "语法高亮
 syntax enable
@@ -317,6 +317,25 @@ func! GNU()
     "格式化代码
     exec "normal =G"
     exec "%!indent"
+    exec "normal G"
+endfunc
+"go gofmt 风格缩进
+func! GO()
+    "设定缩进时的宽度为8
+    set shiftwidth=8
+    "使得按退格键时可以一次删掉8个空格
+    set softtabstop=8
+    "设定tab长度为8
+    set tabstop=8
+    "不将tab用空格替换
+    set noexpandtab
+    "将空格用tab替换
+    set smarttab
+    "设定 Vim 来如何进行缩进
+    set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
+    "格式化代码
+    exec "normal =G"
+    exec "%!gofmt"
     exec "normal G"
 endfunc
 "Java Eclipse风格缩进
@@ -517,10 +536,10 @@ endfunc
 func! RunJava()
     if MySys() == "Windows"
         if search('^\s*package\s\+.*;$', 'pw') > 0
-            "exec "norm gg/^\s*package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
-            "exec "norm gg/^\s*package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
-            "exec "norm gg/^\s*package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
-            exec "norm gg/^\s*package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
+            "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
+            "exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg/package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
             exec "norm gg"
         else
             "exec "!java %<"
@@ -530,8 +549,8 @@ func! RunJava()
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') > 0
-            "exec "norm gg/^package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
-            exec "norm gg/^package/s+8" | exec "!cd .. && java ".expand('<cfile>').".%<"
+            "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
+            exec "norm gg/package/s+8" | exec "!cd .. && java ".expand('<cfile>').".%<"
             exec "norm gg"
         else
             exec "!java %<"
@@ -728,7 +747,7 @@ elseif MySys() == "Linux"
         autocmd filetype c,cpp :command! -nargs=? Run :!./%< <args>
         autocmd filetype python  :command! -nargs=? Run :!python % <args>
         autocmd filetype htm,html,xhtml :command! Run :!firefox %
-    endif
+    endi"f
 endif
 if has("autocmd")
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
@@ -840,8 +859,8 @@ map g=l :call LT()<CR>v<Esc>
 map g=k :call KR()<CR>v<Esc>
 "MS缩进风格 g=m
 map g=m :call MS()<CR>v<Esc>
-"GNU缩进风格 g=g
-map g=g :call GNU()<CR>v<Esc>
+"go gofmt缩进风格 g=g
+map g=g :call GO()<CR>v<Esc>
 "Java Eclipse缩进风格 g=j
 map g=j :call JE()<CR>v<Esc>
 "DS去掉尾空 g=d
@@ -888,7 +907,7 @@ nmap <leader>5 :set filetype=php<CR>
 :command TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SC :w! E:\code\GitHub\IceVim\.vimrc |:update
+:command SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置文件/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
@@ -1004,8 +1023,8 @@ nnoremap gB :bNext<CR>
 map <C-Q> <plug>NERDCommenterToggle
 
 "------------------ZenCoding设置------------------
-"<C-K>,
-let g:user_zen_leader_key = '<C-K>'
+"<C-\>,
+let g:user_zen_leader_key = '<C-\>'
 
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
