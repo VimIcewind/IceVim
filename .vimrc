@@ -1,4 +1,4 @@
-"Last Modified: 2016-08-12 15:20:20
+"Last Modified: 2016-09-18 12:36:28
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -15,7 +15,7 @@ func! MySys()
     endif
 endfunc
 
-if has('gui_running')
+if has("gui_running")
     "设置GUI窗口位置
     if MySys() == "Windows"
         winpos 353 120
@@ -51,7 +51,7 @@ if has('gui_running')
 endif
 
 "窗口最大化
-"if has('win32')
+"if has("win32")
 "    au GUIEnter * simalt ~x
 "else
 "    au GUIEnter * call MaximizeWindow()
@@ -765,7 +765,7 @@ autocmd BufEnter *.pc set filetype=esqlc
 
 ""设置快捷键
 "外观
-if has('gui_running')
+if has("gui_running")
     "调整窗口大小
     if MySys() == "Windows"
         :command Long :set lines=36 columns=80 | winpos 353 35 | :normal =
@@ -815,7 +815,7 @@ endif
 
 ""颜色主题适用于Windowns,Linux...
 if exists("+syntax")
-    if has('gui_running')
+    if has("gui_running")
         "主题默认设置
         colorscheme torte
     else
@@ -1002,10 +1002,12 @@ let g:winManagerWidth=34
 
 "--------------------Cscope设置--------------------
 "生成cscope.out命令: cscope -Rbkq
-if filereadable("cscope.out")
-    cs add cscope.out
-elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
+if has("cscope")
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
 endif
 
 "--------------------Airline设置--------------------
