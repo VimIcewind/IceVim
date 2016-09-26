@@ -1,4 +1,4 @@
-"Last Modified: 2016-09-18 12:36:28
+"Last Modified: 2016-09-26 14:07:45
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1005,6 +1005,8 @@ let g:winManagerWidth=34
 if has("cscope")
     if filereadable("cscope.out")
         cs add cscope.out
+        "不自动设置当前目录为文件所在目录
+        set noautochdir
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
