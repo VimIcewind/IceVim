@@ -1,4 +1,4 @@
-"Last Modified: 2016-09-26 14:07:45
+"Last Modified: 2017-03-08 10:26:29
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -965,7 +965,7 @@ if MySys() == "Windows"
     set path+=E:\MinGW\include,E:\MinGW\lib\gcc\mingw32\4.7.2\include,
                 \E:\MinGW\lib\gcc\mingw32\4.7.2\include\c++
 elseif MySys() == "Linux"
-    set path+=/usr/include/
+    set path+=/usr/include/,/usr/include/c++/*/
 endif
 
 "当有多个同名函数时，需要选择
