@@ -1,4 +1,4 @@
-"Last Modified: 2017-03-08 10:26:29
+"Last Modified: 2017-03-08 12:32:11
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -604,6 +604,9 @@ endfunc
 
 "根据文件类型自动选择相应的编译函数
 func! CompileCode()
+    if MySys() == "Linux"
+        hi Search term=reverse ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black
+    endif
     if &filetype == "c"
         exec "call CompileC()"
     elseif &filetype == "cpp"
