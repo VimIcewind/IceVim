@@ -1,7 +1,9 @@
-"Last Modified: 2017-05-02 16:16:18
+"Last Modified: 2017-05-02 18:09:05
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
+"Notice:  is <C-V><C-R>   is <C-V><C-M>   is <C-V><C-[> when input this command into this file.
+"Notice:  is <C-R>   is <C-M>   is <C-[> when you type this command by hand.
 
 "不使用vi兼容模式
 set nocompatible
