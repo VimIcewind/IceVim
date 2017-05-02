@@ -1,4 +1,4 @@
-"Last Modified: 2017-05-02 15:12:40
+"Last Modified: 2017-05-02 16:16:18
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -211,15 +211,6 @@ endif
 "让TOhtml产生有CSS语法的html
 let html_use_css=1
 
-"编辑一个文件时，直接用相应的缩进风格
-if has("autocmd")
-    autocmd FileType c,cpp,go,make set sw=8 sts=8 ts=8 smarttab
-    autocmd FileType java set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
-endif
-
 "编辑一个文件时，直接用相应的折叠风格
 if has("autocmd")
     autocmd FileType htm,html,xhtml,xml,jsp set foldnestmax=16
@@ -228,6 +219,15 @@ endif
 ""设置缩进和Tab
 set sw=8 sts=8 ts=8 smarttab
 set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
+"编辑一个文件时，直接用相应的缩进风格
+if has("autocmd")
+    autocmd FileType c,cpp,go,make set sw=8 sts=8 ts=8 smarttab
+    autocmd FileType java,ant set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
+endif
+
 "Longline Linux 风格缩进
 func! LL()
     "设定缩进时的宽度为8
