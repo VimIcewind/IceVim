@@ -1,4 +1,4 @@
-"Last Modified: 2017-05-02 18:09:05
+"Last Modified: 2017-05-04 14:39:20
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -736,25 +736,8 @@ func! RunResult()
     endif
 endfunc
 
-"设置:Run执行的命令，主要用于带参数运行命令
-if MySys() == "Windows"
-    if has("autocmd")
-        autocmd filetype make :command! -nargs=? Run :exe "normal gg/:<cr>:noh<cr>b"|:exe "!.\\".expand('<cfile>')." <args>"
-        "autocmd filetype c,cpp :command! -nargs=? Run :exe "!.\\".expand("%<")." <args>"
-        autocmd filetype c,cpp :command! -nargs=? Run :exe "!start cmd /C \".%<"." <args>"." && pause\""
-        autocmd filetype java :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && dir "." && pause\""
-        autocmd filetype python  :command! -nargs=? Run :!python % <args>
-        autocmd filetype htm,html,xhtml :command! Run :!%
-    endif
-elseif MySys() == "Linux"
-    if has("autocmd")
-        autocmd filetype make :command! -nargs=? Run :exe "normal gg/:<cr>:noh<cr>b"|:exe '!./'.expand('<cfile>').<args>
-        autocmd filetype c,cpp :command! -nargs=? Run :!./%< <args>
-        autocmd filetype python  :command! -nargs=? Run :!python % <args>
-        autocmd filetype htm,html,xhtml :command! Run :!firefox %
-    endif
-endif
 if has("autocmd")
+    autocmd BufEnter *.pc set filetype=esqlc
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
 endif
 func! SetJavaRunType()
@@ -766,7 +749,6 @@ func! SetJavaRunType()
         :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
     endif
 endfunc
-autocmd BufEnter *.pc set filetype=esqlc
 
 ""设置快捷键
 "外观
