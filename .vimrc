@@ -1,4 +1,4 @@
-"Last Modified: 2017-05-05 17:02:52
+"Last Modified: 2017-05-10 15:16:48
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -268,6 +268,8 @@ func! LT()
     "格式化代码
     exec "normal =G"
     exec "%!indent\ -linux"
+    "exec "%!astyle\ --style=linux"
+    "exec "%!astyle\ -A8"
     exec "normal G"
 endfunc
 "K&R 风格缩进
@@ -285,6 +287,8 @@ func! KR()
     "格式化代码
     exec "normal =G"
     exec "%!indent\ -kr -nut"
+    "exec "%!astyle\ --style=kr"
+    "exec "%!astyle\ -A3"
     exec "normal G"
 endfunc
 "MS 风格缩进
@@ -319,6 +323,8 @@ func! GNU()
     "格式化代码
     exec "normal =G"
     exec "%!indent"
+    "exec "%!astyle\ --style=gnu"
+    "exec "%!astyle\ -A7"
     exec "normal G"
 endfunc
 "go gofmt 风格缩进
@@ -356,9 +362,9 @@ func! JE()
     set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
     "格式化代码 用4个空格缩进
     exec "normal =G"
-    exec "%!astyle\ -A2 -I -U -Y -L -p -H -k3 -q"
+    exec "%!astyle\ -A2 -I -U -Y -L -p -H -k3 -q -z2"
     "格式化代码 用tab缩进
-    "exec "%!astyle\ -A2 -I -U -Y -T4 -L -p -H -k3 -q"
+    "exec "%!astyle\ -A2 -I -U -Y -T4 -L -p -H -k3 -q -z2"
     exec "normal G"
 endfunc
 "DS 去行尾空格
