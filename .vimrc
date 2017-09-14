@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-14 16:13:12
+"Last Modified: 2017-09-14 18:22:11
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1010,6 +1010,17 @@ set t_Co=256
 set ttimeoutlen=50
 let g:airline_theme='powerlineish'
 let g:airline_detect_paste=0
+set guifont=Consolas\ for\ Powerline\ FixedD:h11
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 let g:airline#extensions#default#section_truncate_width = { 'b': 79, 'x': 60, 'y': 55, 'z': 45 }
 "let g:airline#extensions#tabline#enabled=1
 
