@@ -1,5 +1,7 @@
-" MIT License. Copyright (c) 2013 Bailey Ling.
+" MIT License. Copyright (c) 2013-2016 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 if !get(g:, 'loaded_ctrlp', 0)
   finish
@@ -36,6 +38,9 @@ endfunction
 " Arguments: focus, byfname, regexp, prv, item, nxt, marked
 function! airline#extensions#ctrlp#ctrlp_airline(...)
   let b = airline#builder#new({'active': 1})
+  if a:2 == 'file'
+    call b.add_section_spaced('CtrlPlight', 'by fname')
+  endif
   if a:3
     call b.add_section_spaced('CtrlPlight', 'regex')
   endif
@@ -48,7 +53,7 @@ function! airline#extensions#ctrlp#ctrlp_airline(...)
   endif
   call b.add_section_spaced('CtrlPdark', a:7)
   call b.split()
-  call b.add_raw('%#CtrlPdark#'.a:1.(g:airline_symbols.space))
+  call b.add_section_spaced('CtrlPdark', a:1)
   call b.add_section_spaced('CtrlPdark', a:2)
   call b.add_section_spaced('CtrlPlight', '%{getcwd()}')
   return b.build()

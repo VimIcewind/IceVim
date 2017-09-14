@@ -1,5 +1,7 @@
-" MIT License. Copyright (c) 2013 Bailey Ling.
+" MIT License. Copyright (c) 2013-2016 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 if !exists(':ProjectCreate')
   finish
@@ -16,16 +18,41 @@ function! airline#extensions#eclim#creat_line(...)
 endfunction
 
 function! airline#extensions#eclim#get_warnings()
+  " Cache vavlues, so that it isn't called too often
+  if exists("s:eclim_errors") &&
+    \  get(b:,  'airline_changenr', 0) == changenr()
+    return s:eclim_errors
+  endif
   let eclimList = eclim#display#signs#GetExisting()
+  let s:eclim_errors = ''
+
   if !empty(eclimList)
-    let errorsLine = eclimList[0]['line']
-    let errorsNumber = len(eclimList)
-    let errors = "[Eclim: line:".string(errorsLine)." (".string(errorsNumber).")]"
-    if !exists(':SyntasticCheck') || SyntasticStatuslineFlag() == ''
-      return errors.(g:airline_symbols.space)
+    " Remove any non-eclim signs (see eclim#display#signs#Update)
+    " First check for just errors since they are more important.
+    " If there are no errors, then check for warnings.
+    let errorList = filter(copy(eclimList), 'v:val.name =~ "^\\(qf_\\)\\?\\(error\\)$"')
+
+    if (empty(errorList))
+      " use the warnings
+      call filter(eclimList, 'v:val.name =~ "^\\(qf_\\)\\?\\(warning\\)$"')
+      let type = 'W'
+    else
+      " Use the errors
+      let eclimList = errorList
+      let type = 'E'
+    endif
+
+    if !empty(eclimList)
+      let errorsLine = eclimList[0]['line']
+      let errorsNumber = len(eclimList)
+      let errors = "[Eclim:" . type . " line:".string(errorsLine)." (".string(errorsNumber).")]"
+      if !exists(':SyntasticCheck') || SyntasticStatuslineFlag() == ''
+        let s:eclim_errors = errors.(g:airline_symbols.space)
+      endif
     endif
   endif
-  return ''
+  let b:airline_changenr = changenr()
+  return s:eclim_errors
 endfunction
 
 function! airline#extensions#eclim#init(ext)
