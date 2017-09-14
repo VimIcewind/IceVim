@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-14 16:09:44
+"Last Modified: 2017-09-14 16:13:12
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1010,7 +1010,7 @@ set t_Co=256
 set ttimeoutlen=50
 let g:airline_theme='powerlineish'
 let g:airline_detect_paste=0
-"let g:airline#extensions#default#section_truncate_width = { 'b': 79, 'x': 60, 'y': 55, 'z': 45 }
+let g:airline#extensions#default#section_truncate_width = { 'b': 79, 'x': 60, 'y': 55, 'z': 45 }
 "let g:airline#extensions#tabline#enabled=1
 
 "--------------------bufexplore设置--------------------
