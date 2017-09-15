@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-15 09:53:05
+"Last Modified: 2017-09-15 15:14:11
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1014,14 +1014,24 @@ set guifont=Consolas\ for\ Powerline\ FixedD:h11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
-let g:airline#extensions#default#section_truncate_width = { 'b': 79, 'x': 60, 'y': 55, 'z': 45 }
+if &enc == 'utf-8' && &fenc == 'utf-8'
+    let g:airline_left_sep = '⮀'
+    let g:airline_left_alt_sep = '⮁'
+    let g:airline_right_sep = '⮂'
+    let g:airline_right_alt_sep = '⮃'
+    let g:airline_symbols.branch = '⭠'
+    let g:airline_symbols.readonly = '⭤'
+    let g:airline_symbols.linenr = '⭡'
+else
+    let g:airline_left_sep = '>'
+    let g:airline_left_alt_sep = '>'
+    let g:airline_right_sep = '<'
+    let g:airline_right_alt_sep = '<'
+    let g:airline_symbols.branch = '|'
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr = 'LN'
+endif
+let g:airline#extensions#default#section_truncate_width = {'b': 79, 'x': 60, 'y': 55, 'z': 45}
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr} %1l%#__restore__#:%1v'
 "let g:airline#extensions#tabline#enabled=1
 
