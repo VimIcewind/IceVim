@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-15 15:14:11
+"Last Modified: 2017-09-18 12:34:03
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -8,7 +8,7 @@ au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
 "不使用vi兼容模式
 set nocompatible
 
-"返回系统类型 eg: Windows, or Linux, Mac, et.st..
+"返回系统类型 eg: Windows, Linux, Mac...
 func! MySys()
     if has("win16") || has("win32") || has("win64") || has("win95")
         return "Windows"
@@ -1014,7 +1014,7 @@ set guifont=Consolas\ for\ Powerline\ FixedD:h11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-if &enc == 'utf-8' && &fenc == 'utf-8'
+if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
     let g:airline_left_sep = '⮀'
     let g:airline_left_alt_sep = '⮁'
     let g:airline_right_sep = '⮂'
