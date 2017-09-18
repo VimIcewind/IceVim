@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-18 12:34:03
+"Last Modified: 2017-09-18 21:34:59
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -92,7 +92,7 @@ set fencs=ucs-bom,utf-8,gbk,cp936,gb2312,gb18030,big5,euc-jp,euc-kr,latin1
 
 ""Quickfix设置
 "Quickfix messages编码转换
-function QfMakeConv()
+function! QfMakeConv()
     let qflist = getqflist()
     for i in qflist
         let i.text = iconv(i.text, "cp936", "utf-8")
@@ -861,7 +861,7 @@ map g=s :call TS()<CR>v<Esc>
 
 "格式化代码 g==
 map g== :call FF()<CR>v<Esc>
-func FF()
+func! FF()
     if &filetype == "c"
         exec "call LL()"
     elseif &filetype == "java"
@@ -905,12 +905,12 @@ nmap <leader>5 :set filetype=php<CR>
 
 "":TOhtml的衍生版, :TH, :TW
 "修改默认的网页编码为UTF-8
-:command TH :normal zn:TOggjjj3f=lct"UTF-8grZZ
+:command! TH :normal zn:TOggjjj3f=lct"UTF-8grZZ
 "将配色置为默认配色白色
-:command TW :color default |:color default |:TH
+:command! TW :color default |:color default |:TH
 
 "将本文件同步到需要同步的文件夹里
-:command SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置文件/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
+:command! SC :w! G:/Download/.vimrc |:w! G:/百度云/我的配置文件/vimrc |:w! E:\code\GitHub\IceVim\.vimrc |:update
 
 "窗口分割时,进行切换的按键热键需要连接两次,比如从下方窗口移动
 "光标到上方窗口,需要<c-w>k,非常麻烦,现在重映射为<c-k>,切换的
