@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-18 21:48:05
+"Last Modified: 2017-09-20 09:50:48
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1014,8 +1014,8 @@ set guifont=Consolas\ for\ Powerline\ FixedD:h11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-"if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
-if &enc == 'utf-8' && &fenc == 'utf-8'
+if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
+"if &enc == 'utf-8' && &fenc == 'utf-8'
     let g:airline_left_sep = '⮀'
     let g:airline_left_alt_sep = '⮁'
     let g:airline_right_sep = '⮂'
@@ -1024,6 +1024,7 @@ if &enc == 'utf-8' && &fenc == 'utf-8'
     let g:airline_symbols.readonly = '⭤'
     let g:airline_symbols.linenr = '⭡'
 else
+    "let g:airline_symbols_ascii = 1
     let g:airline_left_sep = '>'
     let g:airline_left_alt_sep = '>'
     let g:airline_right_sep = '<'
