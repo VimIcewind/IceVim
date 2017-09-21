@@ -1,4 +1,4 @@
-"Last Modified: 2017-09-20 09:50:48
+"Last Modified: 2017-09-21 09:19:38
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -80,6 +80,8 @@ filetype indent on
 set enc=utf-8
 "文件编码设置fileencoding
 set fenc=utf-8
+"文件默认换行符为unix的\n即<LF>
+set fileformat=unix
 "把所有不明宽度的字符的宽度置为双倍字符宽度
 set ambiwidth=double
 "Vim自动探测fileencoding的顺序列表
