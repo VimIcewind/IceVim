@@ -21,5 +21,5 @@ mv .vim/ .vimrc  ~
 cd ~
 ```
 
-By the way, you need to install ctags, indent, gcc, gdb, make and so on,
+By the way, you need to install ctags, cscope, indent, gcc, gdb, make and so on,
   or you may get some error messages.
