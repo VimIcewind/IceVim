@@ -5,7 +5,7 @@ IceVim
 2. The vimfiles is used in Windows.
 
     You may need to change your vimpath in .vimrc if your vimpath is not
-  "E:\vim" in Windows.
+  "D:\vim" in Windows.
 
 3. The .vim is used in Linux.
 
