@@ -1,6 +1,6 @@
 IceVim
 -------------------------------------------------------------------------------
-1. The .vimrc  is used in both Windows and Linux.
+1. The .vimrc and fonts is used in both Windows and Linux.
 
 2. The vimfiles, dict, tools is used in Windows.
 
