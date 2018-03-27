@@ -1,4 +1,4 @@
-"Last Modified: 2018-01-30 10:38:41
+"Last Modified: 2018-03-27 21:46:39
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -876,6 +876,8 @@ map g=s :call TS()<CR>v<Esc>
 map g== :call FF()<CR>v<Esc>
 func! FF()
     if &filetype == "c"
+        exec "call LL()"
+    elseif &filetype == "cpp"
         exec "call LL()"
     elseif &filetype == "java"
         exec "call JE()"
