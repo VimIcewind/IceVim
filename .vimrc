@@ -1,4 +1,4 @@
-"Last Modified: 2018-03-27 21:46:39
+"Last Modified: 2018-03-28 11:50:57
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -418,7 +418,7 @@ endfunc
 func! CompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
-        set makeprg=javac\ -g\ -d\ ..\ %
+        set makeprg=javac\ -g\ -d\ ../..\ %
     else
         set makeprg=javac\ -g\ -d\ .\ %
     endif
@@ -485,7 +485,7 @@ endfunc
 func! ReleaseCompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
-        set makeprg=javac\ -d\ ..\ %
+        set makeprg=javac\ -d\ ../..\ %
     else
         set makeprg=javac\ -d\ .\ %
     endif
@@ -523,14 +523,6 @@ func! ReleaseCompileMake()
     exec "make\ -f\ %"
 endfunc
 
-"编译Java源文件
-func! ReleaseCompileJava()
-    exec "update"
-    set makeprg=javac\ -d\ .\ %
-    exec "make"
-    set makeprg=make
-endfunc
-
 "编译LaTeX源文件
 func! CompileLaTeX()
     exec "update"
@@ -560,7 +552,7 @@ func! RunJava()
             "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
             "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
             "exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
-            exec "norm gg/package/s+8" | exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg/package/s+8" | exec "!start cmd /C \"cd ../.. && java ".expand('<cfile>').".%<"." && pause\""
             exec "norm gg"
         else
             "exec "!java %<"
@@ -571,7 +563,7 @@ func! RunJava()
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') > 0
             "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
-            exec "norm gg/package/s+8" | exec "!cd .. && java ".expand('<cfile>').".%<"
+            exec "norm gg/package/s+8" | exec "!cd ../.. && java ".expand('<cfile>').".%<"
             exec "norm gg"
         else
             exec "!java %<"
