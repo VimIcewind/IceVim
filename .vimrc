@@ -1,4 +1,4 @@
-"Last Modified: 2018-03-28 11:50:57
+"Last Modified: 2018-04-19 10:10:23
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1003,6 +1003,14 @@ let g:winManagerWidth=34
 "--------------------Cscope设置--------------------
 "生成cscope.out命令: cscope -Rbkq
 if has("cscope")
+    nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
     if filereadable("cscope.out")
         cs add cscope.out
         "不自动设置当前目录为文件所在目录
@@ -1062,7 +1070,7 @@ map <C-Q> <plug>NERDCommenterToggle
 
 "------------------ZenCoding设置------------------
 "<C-\>,
-let g:user_zen_leader_key = '<C-_>'
+let g:user_zen_leader_key = '<C-\>'
 
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
