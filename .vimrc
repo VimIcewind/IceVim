@@ -1,4 +1,4 @@
-"Last Modified: 2018-04-19 10:10:23
+"Last Modified: 2018-04-19 11:11:45
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -87,7 +87,7 @@ set fenc=utf-8
 "文件默认换行符为unix的\n即<LF>
 set fileformat=unix
 "如果Linux系统编码包含GB(GBK,gbk,GB2312,gb2312,GB18030,gb18030), 则Vim内部编码cp936, 文件编码默认cp936
-if MySys() == "Linux" && match(touppper(system("echo $LANG")), "GB") > 0
+if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
     "Vim内部使用的编码
     set enc=cp936
     "文件编码设置fileencoding
@@ -595,6 +595,12 @@ func! RunRuby()
     exec "!ruby %"
 endfunc
 
+"运行javascript源文件
+func! RunJS()
+    exec "update"
+    exec "!node %"
+endfunc
+
 "预览htm、html、xhtml结果
 func! RunHtml()
     exec "update"
@@ -743,7 +749,7 @@ func! RunResult()
     elseif &filetype == "css"
         exec "call RunHtml()"
     elseif &filetype == "javascript"
-        exec "call RunHtml()"
+        exec "call RunJS()"
     endif
 endfunc
 
@@ -898,7 +904,7 @@ endfunc
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
     autocmd FileType c,cpp,java,go,make call MAP()
-    autocmd FileType python,perl,ruby,php call MAP()
+    autocmd FileType python,perl,ruby,php,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,tex,latex call MAP()
 endif
