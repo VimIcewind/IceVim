@@ -1,4 +1,4 @@
-"Last Modified: 2018-04-19 11:11:45
+"Last Modified: 2018-04-21 12:11:21
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1044,6 +1044,7 @@ if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
     let g:airline_symbols.branch = '⭠'
     let g:airline_symbols.readonly = '⭤'
     let g:airline_symbols.linenr = '⭡'
+    let g:airline_symbols.whitespace = '☲'
 else
     "let g:airline_symbols_ascii = 1
     let g:airline_left_sep = '>'
@@ -1053,6 +1054,7 @@ else
     let g:airline_symbols.branch = '|'
     let g:airline_symbols.readonly = ''
     let g:airline_symbols.linenr = 'LN'
+    let g:airline_symbols.whitespace = 'LN'
 endif
 let g:airline#extensions#default#section_truncate_width = {'b': 79, 'x': 60, 'y': 55, 'z': 45}
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr} %1l%#__restore__#:%1v'
@@ -1084,4 +1086,4 @@ imap <F2> <C-O>NERDTreeToggle<CR>
 map <F3> <Esc>:TlistToggle<CR>:set nu!<CR>
 imap <F3> <C-O>:TlistToggle<CR>:set nu!<CR>
 map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
-imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
+imap <F4> <C-O>:WMToggle<CR>:set nu!<CR> 
