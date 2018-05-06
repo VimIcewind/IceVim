@@ -1,4 +1,4 @@
-"Last Modified: 2018-04-24 17:23:39
+"Last Modified: 2018-05-06 11:01:15
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -426,6 +426,14 @@ func! CompileJava()
     set makeprg=make
 endfunc
 
+"编译C#源文件
+func! CompileCS()
+    exec "update"
+    set makeprg=csc\ -debug\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
 "编译go源文件
 func! CompileGo()
     exec "update"
@@ -571,6 +579,15 @@ func! RunJava()
     endif
 endfunc
 
+"运行C#类文件
+func! RunCS()
+    if MySys() == "Windows"
+        exec "!start cmd /C \".\\".expand("%<")." && pause\""
+    elseif MySys() == "Linux"
+        exec "!%<"
+    endif
+endfunc
+
 "运行go源文件
 func! RunGo()
     exec "update"
@@ -634,6 +651,8 @@ func! CompileCode()
         exec "call CompileAsm()"
     elseif &filetype == "java"
         exec "call CompileJava()"
+    elseif &filetype == "cs"
+        exec "call CompileCS()"
     elseif &filetype == "go"
         exec "call CompileGo()"
     elseif &filetype == "tex"
@@ -728,6 +747,8 @@ func! RunResult()
         exec "call RunCCppAsm()"
     elseif &filetype == "java"
         exec "call RunJava()"
+    elseif &filetype == "cs"
+        exec "call RunCS()"
     elseif &filetype == "go"
         exec "call RunGo()"
     elseif &filetype == "tex"
@@ -903,7 +924,7 @@ endfunc
 
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
-    autocmd FileType c,cpp,java,go,make call MAP()
+    autocmd FileType c,cpp,java,cs,go,make call MAP()
     autocmd FileType python,perl,ruby,php,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,tex,latex call MAP()
@@ -968,8 +989,8 @@ onoremap <C-S-Tab> <C-C>gT
 ""目录设置
 "设置的头文件*.h所在目录
 if MySys() == "Windows"
-    set path+=E:\MinGW\include,E:\MinGW\lib\gcc\mingw32\4.7.2\include,
-                \E:\MinGW\lib\gcc\mingw32\4.7.2\include\c++
+    set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.7.2\include,
+                \D:\MinGW\lib\gcc\mingw32\4.7.2\include\c++
 elseif MySys() == "Linux"
     set path+=/usr/include/,/usr/include/c++/*/
 endif
@@ -1030,13 +1051,16 @@ endif
 set t_Co=256
 set ttimeoutlen=50
 let g:airline_theme='powerlineish'
-let g:airline_detect_paste=0
+let g:airline_powerline_fonts=1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#whitespace#enabled=0
+"let g:airline#extensions#whitespace#symbol='!'
 set guifont=Consolas\ for\ Powerline\ FixedD:h11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
-"if &enc == 'utf-8' && &fenc == 'utf-8'
+"if has("gui_running") && &enc == 'utf-8' && &fenc == 'utf-8'
+if &enc == 'utf-8' && &fenc == 'utf-8'
     let g:airline_left_sep = '⮀'
     let g:airline_left_alt_sep = '⮁'
     let g:airline_right_sep = '⮂'
@@ -1056,6 +1080,7 @@ else
     let g:airline_symbols.linenr = 'LN'
     let g:airline_symbols.whitespace = 'LN'
 endif
+let g:airline_detect_paste=0
 let g:airline#extensions#default#section_truncate_width = {'b': 79, 'x': 60, 'y': 55, 'z': 45}
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr} %1l%#__restore__#:%1v'
 "let g:airline#extensions#tabline#enabled=1
@@ -1086,4 +1111,4 @@ imap <F2> <C-O>NERDTreeToggle<CR>
 map <F3> <Esc>:TlistToggle<CR>:set nu!<CR>
 imap <F3> <C-O>:TlistToggle<CR>:set nu!<CR>
 map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
-imap <F4> <C-O>:WMToggle<CR>:set nu!<CR> 
+imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
