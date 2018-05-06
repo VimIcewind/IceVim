@@ -1,4 +1,4 @@
-"Last Modified: 2018-05-06 11:01:15
+"Last Modified: 2018-05-06 20:02:40
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -429,7 +429,7 @@ endfunc
 "编译C#源文件
 func! CompileCS()
     exec "update"
-    set makeprg=csc\ -debug\ %
+    set makeprg=csc\ /nologo\ -debug\ %
     exec "make"
     set makeprg=make
 endfunc
