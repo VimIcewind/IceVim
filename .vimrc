@@ -1,4 +1,4 @@
-"Last Modified: 2018-05-22 21:33:13
+"Last Modified: 2018-08-04 21:28:01
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -987,6 +987,7 @@ cnoremap <C-S-Tab> <C-C>gT
 onoremap <C-S-Tab> <C-C>gT
 
 ""目录设置
+set path=./**
 "设置的头文件*.h所在目录
 if MySys() == "Windows"
     set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.7.2\include,
