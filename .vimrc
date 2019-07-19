@@ -1,4 +1,4 @@
-"Last Modified: 2019-07-04 17:58:28
+"Last Modified: 2019-07-19 14:13:03
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -434,10 +434,26 @@ func! CompileCS()
     set makeprg=make
 endfunc
 
+"编译scala源文件
+func! CompileScala()
+    exec "update"
+    set makeprg=scalac\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
 "编译go源文件
 func! CompileGo()
     exec "update"
     set makeprg=go\ build\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
+"编译rust源文件
+func! CompileRust()
+    exec "update"
+    set makeprg=rustc\ %
     exec "make"
     set makeprg=make
 endfunc
@@ -588,10 +604,24 @@ func! RunCS()
     endif
 endfunc
 
+"运行java类文件
+func! RunScala()
+    if MySys() == "Windows"
+        exec "!start cmd /C \"scala %< && pause\""
+    elseif MySys() == "Linux"
+        exec "!scala %<"
+    endif
+endfunc
+
 "运行go源文件
 func! RunGo()
     exec "update"
     exec "!go run %"
+endfunc
+
+"运行rust源文件
+func! RunRust()
+    exec "!%<"
 endfunc
 
 "运行perl源文件
@@ -653,8 +683,12 @@ func! CompileCode()
         exec "call CompileJava()"
     elseif &filetype == "cs"
         exec "call CompileCS()"
+    elseif &filetype == "scala"
+        exec "call CompileScala()"
     elseif &filetype == "go"
         exec "call CompileGo()"
+    elseif &filetype == "rust"
+        exec "call CompileRust()"
     elseif &filetype == "tex"
         exec "call CompileLaTeX()"
     elseif &filetype == "plaintex"
@@ -749,8 +783,12 @@ func! RunResult()
         exec "call RunJava()"
     elseif &filetype == "cs"
         exec "call RunCS()"
+    elseif &filetype == "scala"
+        exec "call RunScala()"
     elseif &filetype == "go"
         exec "call RunGo()"
+    elseif &filetype == "rust"
+        exec "call RunRust()"
     elseif &filetype == "tex"
         exec "call RunLaTeX()"
     elseif &filetype == "plaintex"
@@ -924,7 +962,7 @@ endfunc
 
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
-    autocmd FileType c,cpp,java,cs,go,make call MAP()
+    autocmd FileType c,cpp,java,cs,scala,go,rust,make call MAP()
     autocmd FileType python,perl,ruby,php,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,tex,latex call MAP()
@@ -990,8 +1028,7 @@ onoremap <C-S-Tab> <C-C>gT
 "set path=./**
 "设置的头文件*.h所在目录
 if MySys() == "Windows"
-    set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include,
-                \D:\MinGW\lib\gcc\mingw32\4.9.3\include\c++
+    set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include\c++
     ""补全时不搜索included files
     set complete=.,w,b,u,t
 elseif MySys() == "Linux"
