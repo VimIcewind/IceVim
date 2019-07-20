@@ -1,4 +1,4 @@
-"Last Modified: 2019-07-19 14:13:03
+"Last Modified: 2019-07-20 21:25:45
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1028,7 +1028,8 @@ onoremap <C-S-Tab> <C-C>gT
 "set path=./**
 "设置的头文件*.h所在目录
 if MySys() == "Windows"
-    set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include\c++
+    "set path+=D:\MinGW\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include,D:\MinGW\lib\gcc\mingw32\4.9.3\include\c++
+    set path+=D:\MinGW64\include,D:\MinGW64\lib\gcc\x86_64-w64-mingw32\8.1.0\include,D:\MinGW64\lib\gcc\x86_64-w64-mingw32\8.1.0\include\ssp,D:\MinGW64\lib\gcc\x86_64-w64-mingw32\8.1.0\include\c++
     ""补全时不搜索included files
     set complete=.,w,b,u,t
 elseif MySys() == "Linux"
