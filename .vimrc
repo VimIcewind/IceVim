@@ -1,4 +1,4 @@
-"Last Modified: 2019-07-20 21:25:45
+"Last Modified: 2019-07-21 09:27:24
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -615,8 +615,7 @@ endfunc
 
 "运行go源文件
 func! RunGo()
-    exec "update"
-    exec "!go run %"
+    exec "!%<"
 endfunc
 
 "运行rust源文件
