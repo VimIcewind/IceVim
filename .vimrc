@@ -1,4 +1,4 @@
-"Last Modified: 2019-07-30 16:38:44
+"Last Modified: 2019-08-04 16:43:02
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -615,12 +615,24 @@ endfunc
 
 "运行go源文件
 func! RunGo()
-    exec "!%<"
+    if MySys() == "Windows"
+        "exec "!.\\".expand("%<")
+        "exec "!start .\\".expand("%<")
+        exec "!start cmd /C \".\\".expand("%<")." && pause\""
+    elseif MySys() == "Linux"
+        exec "!./%<"
+    endif
 endfunc
 
 "运行rust源文件
 func! RunRust()
-    exec "!%<"
+    if MySys() == "Windows"
+        "exec "!.\\".expand("%<")
+        "exec "!start .\\".expand("%<")
+        exec "!start cmd /C \".\\".expand("%<")." && pause\""
+    elseif MySys() == "Linux"
+        exec "!./%<"
+    endif
 endfunc
 
 "运行perl源文件
