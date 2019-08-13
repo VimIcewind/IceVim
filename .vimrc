@@ -1,4 +1,4 @@
-"Last Modified: 2019-08-13 17:06:28
+"Last Modified: 2019-08-13 21:35:30
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -240,7 +240,7 @@ if has("autocmd")
     autocmd FileType java,groovy,ant set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType javascript,vue set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType javascript,json,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
 endif
 
