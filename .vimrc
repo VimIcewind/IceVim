@@ -1,4 +1,4 @@
-"Last Modified: 2019-08-05 15:13:03
+"Last Modified: 2019-08-13 10:41:54
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1160,6 +1160,10 @@ let g:user_zen_leader_key = '<C-_>'
 "------------------Emmet设置------------------
 "<C-_>,
 let g:user_emmet_leader_key = '<C-_>'
+
+"------------------web-indent设置------------------
+"Disable Logging
+let g:js_indent_log = 0
 
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
