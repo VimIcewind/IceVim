@@ -1,4 +1,4 @@
-"Last Modified: 2019-08-13 10:41:54
+"Last Modified: 2019-08-13 17:06:28
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -240,6 +240,7 @@ if has("autocmd")
     autocmd FileType java,groovy,ant set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType javascript,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
 endif
 
@@ -978,6 +979,16 @@ if has("autocmd")
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,tex,latex call MAP()
 endif
+
+"vue
+au BufNewFile,BufRead *.vue,*.wpy call s:setFiletype()
+function! s:setFiletype()
+    " enable JavaScript autocmds first
+    " let &filetype = 'javascript'
+
+    " then set filetype
+    let &filetype = 'vue'
+endfunction
 
 "一些不错的映射转换语法（如果在一个文件中混合了不同语言时有用）
 nmap <leader>1 :set filetype=xhtml<CR>
