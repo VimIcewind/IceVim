@@ -1,4 +1,4 @@
-"Last Modified: 2019-08-13 21:35:30
+"Last Modified: 2019-08-14 18:48:05
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -240,7 +240,7 @@ if has("autocmd")
     autocmd FileType java,groovy,ant set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
-    autocmd FileType javascript,json,vue set sw=4 sts=4 ts=4 expandtab
+    autocmd FileType typescript,javascript,json,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
 endif
 
@@ -459,6 +459,14 @@ func! CompileRust()
     set makeprg=make
 endfunc
 
+"编译typescript源文件
+func! CompileTS()
+    exec "update"
+    set makeprg=tsc\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
 "汇编、连接asm源文件
 func! CompileAsm()
     if MySys() == "Windows"
@@ -654,6 +662,12 @@ func! RunRuby()
     exec "!ruby %"
 endfunc
 
+"运行typescript源文件
+func! RunTS()
+    exec "update"
+    exec "!node %<.js"
+endfunc
+
 "运行javascript源文件
 func! RunJS()
     exec "update"
@@ -701,6 +715,8 @@ func! CompileCode()
         exec "call CompileGo()"
     elseif &filetype == "rust"
         exec "call CompileRust()"
+    elseif &filetype == "typescript"
+        exec "call CompileTS()"
     elseif &filetype == "tex"
         exec "call CompileLaTeX()"
     elseif &filetype == "plaintex"
@@ -801,6 +817,8 @@ func! RunResult()
         exec "call RunGo()"
     elseif &filetype == "rust"
         exec "call RunRust()"
+    elseif &filetype == "typescript"
+        exec "call RunTS()"
     elseif &filetype == "tex"
         exec "call RunLaTeX()"
     elseif &filetype == "plaintex"
@@ -975,7 +993,7 @@ endfunc
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
     autocmd FileType c,cpp,java,cs,scala,go,rust,make call MAP()
-    autocmd FileType python,perl,ruby,php,javascript call MAP()
+    autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,tex,latex call MAP()
 endif
