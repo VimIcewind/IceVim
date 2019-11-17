@@ -1,4 +1,4 @@
-"Last Modified: 2019-08-14 18:48:05
+"Last Modified: 2019-11-17 18:21:45
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -50,7 +50,8 @@ if has("gui_running")
         "set guifont=Nimbus\ Mono\ L\ 10
     elseif MySys() == "Windows"
         "显示的字体
-        set guifont=Consolas:h11:cANSI
+        "set guifont=Consolas:h11:cANSI
+        set guifont=Consolas\ for\ Powerline\ FixedD:h11
     endif
     "设置默认的当前目录为用户家目录
     cd ~
@@ -1137,7 +1138,6 @@ let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#whitespace#enabled=0
 "let g:airline#extensions#whitespace#symbol='!'
-set guifont=Consolas\ for\ Powerline\ FixedD:h11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
