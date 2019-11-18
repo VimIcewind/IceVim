@@ -1,4 +1,4 @@
-"Last Modified: 2019-11-17 18:21:45
+"Last Modified: 2019-11-18 15:46:10
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -94,6 +94,7 @@ if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
     "文件编码设置fileencoding
     set fenc=cp936
 endif
+
 "把所有不明宽度的字符的宽度置为双倍字符宽度
 set ambiwidth=double
 "Vim自动探测fileencoding的顺序列表
@@ -243,6 +244,7 @@ if has("autocmd")
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
     autocmd FileType typescript,javascript,json,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
+    autocmd FileType lisp set sw=2 sts=2 ts=2 expandtab
 endif
 
 "Longline Linux 风格缩进
@@ -468,6 +470,14 @@ func! CompileTS()
     set makeprg=make
 endfunc
 
+"编译elisp源文件
+func! CompileEL()
+    exec "update"
+    set makeprg=emacs\ -batch\ -f\ batch-byte-compile\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
 "汇编、连接asm源文件
 func! CompileAsm()
     if MySys() == "Windows"
@@ -675,6 +685,12 @@ func! RunJS()
     exec "!node %"
 endfunc
 
+"运行elisp源文件
+func! RunEL()
+    exec "update"
+    exec "!emacs --script %"
+endfunc
+
 "预览htm、html、xhtml结果
 func! RunHtml()
     exec "update"
@@ -718,6 +734,8 @@ func! CompileCode()
         exec "call CompileRust()"
     elseif &filetype == "typescript"
         exec "call CompileTS()"
+    elseif &filetype == "lisp"
+        exec "call CompileEL()"
     elseif &filetype == "tex"
         exec "call CompileLaTeX()"
     elseif &filetype == "plaintex"
@@ -820,6 +838,10 @@ func! RunResult()
         exec "call RunRust()"
     elseif &filetype == "typescript"
         exec "call RunTS()"
+    elseif &filetype == "javascript"
+        exec "call RunJS()"
+    elseif &filetype == "lisp"
+        exec "call RunEL()"
     elseif &filetype == "tex"
         exec "call RunLaTeX()"
     elseif &filetype == "plaintex"
@@ -838,8 +860,6 @@ func! RunResult()
         exec "call RunHtml()"
     elseif &filetype == "css"
         exec "call RunHtml()"
-    elseif &filetype == "javascript"
-        exec "call RunJS()"
     endif
 endfunc
 
@@ -996,7 +1016,7 @@ if has("autocmd")
     autocmd FileType c,cpp,java,cs,scala,go,rust,make call MAP()
     autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
-    autocmd FileType vim,tex,latex call MAP()
+    autocmd FileType vim,lisp,tex,latex call MAP()
 endif
 
 "vue
