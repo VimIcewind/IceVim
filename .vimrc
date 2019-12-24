@@ -1,4 +1,4 @@
-"Last Modified: 2019-12-20 10:35:03
+"Last Modified: 2019-12-24 13:57:46
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -921,9 +921,11 @@ if has("gui_running")
         map <F10> <Esc>:call libcallnr("vimtweak.dll", "EnableTopMost", 0)<CR>:normal v:normal<ESC>
         imap <F10> <C-O>:call libcallnr("vimtweak.dll", "EnableTopMost", 0)<CR>
         ""FullScreen
-        "<F11> Enable Disable
+        "<F11> or <Alt + Enter> Enable Disable
         map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>:normal v:normal<ESC>
         imap <F11> <C-O>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>:normal v:normal<ESC>
+        map <A-Enter> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>:normal v:normal<ESC>
+        imap <A-Enter> <C-O>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     endif
 endif
 
