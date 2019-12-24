@@ -1,4 +1,4 @@
-"Last Modified: 2019-12-24 14:03:30
+"Last Modified: 2019-12-24 14:42:03
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -624,7 +624,7 @@ func! RunCS()
     endif
 endfunc
 
-"运行java类文件
+"运行scala类文件
 func! RunScala()
     if MySys() == "Windows"
         exec "!start cmd /C \"scala %< && pause\""
@@ -1215,6 +1215,23 @@ let g:user_emmet_leader_key = '<C-_>'
 "------------------web-indent设置------------------
 "Disable Logging
 let g:js_indent_log = 0
+
+"------------------gutentags设置------------------
+"是否启用gutentags
+let g:gutentags_enabled = 1
+"是否显示调试信息
+"let g:gutentags_trace = 1
+"所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = 'tags'
+"将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+"配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--java-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--languages=c,c++,java']
 
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
