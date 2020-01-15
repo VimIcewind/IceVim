@@ -1,4 +1,4 @@
-"Last Modified: 2019-12-24 14:42:03
+"Last Modified: 2020-01-15 16:35:54
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -94,11 +94,21 @@ if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
     "文件编码设置fileencoding
     set fenc=cp936
 endif
+"Notice: 如果vim自动侦测编码出现error时可能还是会中文乱码,
+"此时可以手动指定打开文件的编码为gbk等,实例如下所示
+":e ++enc=cp936
+":e ++enc=gbk
+":e ++enc=gb2312
+":e ++enc=gb18030
 
 "把所有不明宽度的字符的宽度置为双倍字符宽度
 set ambiwidth=double
 "Vim自动探测fileencoding的顺序列表
 set fencs=ucs-bom,utf-8,gbk,cp936,gb2312,gb18030,big5,euc-jp,euc-kr,latin1
+"Notice: 如果vim自动侦测编码出现error时可能还是会中文乱码, 此时可以手动指定打开文件的编码为gbk等,实例如下所示
+":e ++enc=gbk
+":e ++enc=cp936
+
 "解决菜单乱码
 "source $VIMRUNTIME/menu.vim
 "source $VIMRUNTIME/delmenu.vim
