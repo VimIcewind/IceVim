@@ -1,4 +1,4 @@
-"Last Modified: 2020-01-15 16:35:54
+"Last Modified: 2020-06-19 15:20:44
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -87,6 +87,7 @@ set enc=utf-8
 set fenc=utf-8
 "文件默认换行符为unix的\n即<LF>
 set fileformat=unix
+set fileformats=unix,dos
 "如果Linux系统编码包含GB(GBK,gbk,GB2312,gb2312,GB18030,gb18030), 则Vim内部编码cp936, 文件编码默认cp936
 if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
     "Vim内部使用的编码
