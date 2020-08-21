@@ -1,4 +1,4 @@
-"Last Modified: 2020-08-21 20:35:45
+"Last Modified: 2020-08-21 21:55:00
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -432,7 +432,9 @@ endfunc
 "编译objc源文件
 func! CompileObjc()
     exec "update"
-    set makeprg=clang\ -o\ %<\ %
+    "set makeprg=clang\ -o\ %<\ %
+    "set makeprg=gcc\ `gnustep-config\ --objc-flags`\ -Wl,--no-as-needed\ -lgnustep-base\ -fconstant-string-class=NSConstantString\ -lobjc\ -o\ %<\ %
+    set makeprg=clang\ `gnustep-config\ --objc-flags`\ -L\ /usr/GNUstep/System/Library/Libraries\ -fconstant-string-class=NSConstantString\ -lobjc\ -lgnustep-base\ -o\ %<\ %
     exec "make"
     set makeprg=make
 endfunc
