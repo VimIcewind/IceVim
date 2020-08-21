@@ -1,4 +1,4 @@
-"Last Modified: 2020-06-19 15:20:44
+"Last Modified: 2020-08-21 20:35:45
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -429,6 +429,14 @@ func! CompileCpp()
     set makeprg=make
 endfunc
 
+"编译objc源文件
+func! CompileObjc()
+    exec "update"
+    set makeprg=clang\ -o\ %<\ %
+    exec "make"
+    set makeprg=make
+endfunc
+
 "编译java源文件
 func! CompileJava()
     exec "update"
@@ -731,6 +739,8 @@ func! CompileCode()
         exec "call CompileC()"
     elseif &filetype == "cpp"
         exec "call CompileCpp()"
+    elseif &filetype == "objc"
+        exec "call CompileObjc()"
     elseif &filetype == "asm"
         exec "call CompileAsm()"
     elseif &filetype == "java"
@@ -835,6 +845,8 @@ func! RunResult()
         exec "call RunCCppAsm()"
     elseif &filetype == "cpp"
         exec "call RunCCppAsm()"
+    elseif &filetype == "objc"
+        exec "call RunCCppAsm()"
     elseif &filetype == "asm"
         exec "call RunCCppAsm()"
     elseif &filetype == "java"
@@ -876,6 +888,7 @@ endfunc
 
 if has("autocmd")
     autocmd BufEnter *.pc set filetype=esqlc
+    autocmd BufEnter *.m set filetype=objc
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
 endif
 func! SetJavaRunType()
@@ -1026,7 +1039,7 @@ endfunc
 
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
-    autocmd FileType c,cpp,java,cs,scala,go,rust,make call MAP()
+    autocmd FileType c,cpp,objc,java,cs,scala,go,rust,make call MAP()
     autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,lisp,tex,latex call MAP()
