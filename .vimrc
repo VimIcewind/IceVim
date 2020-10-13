@@ -1,4 +1,4 @@
-"Last Modified: 2020-08-21 21:55:00
+"Last Modified: 2020-10-13 10:31:14
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1254,9 +1254,9 @@ let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 "配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--java-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--java-kinds=+px']
 "let g:gutentags_ctags_extra_args += ['--languages=c,c++,java']
 
 ""插件的快捷键设置
