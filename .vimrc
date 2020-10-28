@@ -1,4 +1,4 @@
-"Last Modified: 2020-10-28 12:01:45
+"Last Modified: 2020-10-28 12:03:58
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1268,6 +1268,7 @@ map <F4> <Esc>:WMToggle<CR>:set nu!<CR>
 imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
 
 ""模拟spacemacs快捷键
+nmap <space>' :term<CR>
 nmap <space>bb :b  <BS>
 nmap <space>bd :bd!<CR>
 nmap <space>fc :saveas  <BS>
