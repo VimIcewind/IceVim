@@ -1,4 +1,4 @@
-"Last Modified: 2021-01-25 10:07:54
+"Last Modified: 2021-01-25 10:47:12
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1273,6 +1273,7 @@ nmap <space>bb :b  <BS>
 nmap <space>bd :bd!<CR>
 nmap <space>fc :saveas  <BS>
 nmap <space>ff :e  <BS>
+nmap <space>fm :make %<<CR>
 nmap <space>pf :find  <BS>
 nmap <space>pg :tjump  <BS>
 nmap <space>ji :tag  <BS>
