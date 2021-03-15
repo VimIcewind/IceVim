@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-15 17:04:59
+"Last Modified: 2021-03-15 20:40:22
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -13,6 +13,7 @@ let &packpath=&runtimepath
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'VimIcewind/FindX'
 Plug 'mattn/emmet-vim'
 Plug 'yegappan/taglist'
 Plug 'jiangmiao/auto-pairs'
