@@ -1,4 +1,4 @@
-"Last Modified: 2021-02-02 16:08:31
+"Last Modified: 2021-03-15 14:49:49
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -7,6 +7,24 @@ au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
 
 "不使用vi兼容模式
 set nocompatible
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'mattn/emmet-vim'
+Plug 'yegappan/taglist'
+Plug 'jiangmiao/auto-pairs'
+Plug 'msanders/snipmate.vim'
+Plug 'vim-scripts/The-NERD-tree'
+Plug 'vim-scripts/winmanager'
+Plug 'itfootman/wintagexplorer'
+Plug 'itfootman/winfileexplorer'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
 
 "返回系统类型 eg: Windows, Linux, Mac...
 func! MySys()
