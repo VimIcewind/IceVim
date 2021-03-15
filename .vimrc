@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-15 14:49:49
+"Last Modified: 2021-03-15 17:04:59
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -7,6 +7,9 @@ au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
 
 "不使用vi兼容模式
 set nocompatible
+
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath=&runtimepath
 
 call plug#begin('~/.vim/plugged')
 
