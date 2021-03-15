@@ -15,12 +15,9 @@ IceVim
 cd ~
 mv .vimrc .vimrc.bak
 mv .vim .vim.bak
-git clone https://github.com/VimIcewind/IceVim.git IceVim
-cd IceVim
-mv .vim/ .vimrc  ~
-cd ~
-vim
-:PlugInstall
+git clone https://github.com/VimIcewind/IceVim.git .IceVim
+cd .IceVim
+make vim
 ```
 
   By the way, you need to install ctags, cscope, indent, gcc, gdb, make and so on,
