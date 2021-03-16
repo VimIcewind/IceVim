@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-15 20:40:22
+"Last Modified: 2021-03-16 10:14:02
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1235,7 +1235,6 @@ endif
 let g:airline_detect_paste=0
 let g:airline#extensions#default#section_truncate_width = {'b': 79, 'x': 60, 'y': 55, 'z': 45}
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr} %1l%#__restore__#:%1v'
-"let g:airline#extensions#tabline#enabled=1
 
 "--------------------bufexplore设置--------------------
 " 打开Buffer Explore
@@ -1253,9 +1252,6 @@ nnoremap gB :bNext<CR>
 "------------------NERD_commenter设置------------------
 map <C-Q> <plug>NERDCommenterToggle
 
-"------------------ZenCoding设置------------------
-"<C-_>,
-let g:user_zen_leader_key = '<C-_>'
 "------------------Emmet设置------------------
 "<C-_>,
 let g:user_emmet_leader_key = '<C-_>'
