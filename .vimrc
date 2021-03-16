@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-16 10:14:02
+"Last Modified: 2021-03-16 15:32:47
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -277,7 +277,7 @@ if has("autocmd")
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
     autocmd FileType typescript,javascript,json,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
-    autocmd FileType lisp set sw=2 sts=2 ts=2 expandtab
+    autocmd FileType lisp,scheme set sw=2 sts=2 ts=2 expandtab
 endif
 
 "Longline Linux 风格缩进
@@ -734,6 +734,12 @@ func! RunEL()
     exec "!emacs --script %"
 endfunc
 
+"运行scheme源文件
+func! RunSS()
+    exec "update"
+    exec "!scheme -q < %"
+endfunc
+
 "预览htm、html、xhtml结果
 func! RunHtml()
     exec "update"
@@ -889,6 +895,8 @@ func! RunResult()
         exec "call RunJS()"
     elseif &filetype == "lisp"
         exec "call RunEL()"
+    elseif &filetype == "scheme"
+        exec "call RunSS()"
     elseif &filetype == "tex"
         exec "call RunLaTeX()"
     elseif &filetype == "plaintex"
@@ -1066,7 +1074,7 @@ if has("autocmd")
     autocmd FileType c,cpp,objc,java,cs,scala,go,rust,make call MAP()
     autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
-    autocmd FileType vim,lisp,tex,latex call MAP()
+    autocmd FileType vim,lisp,scheme,tex,latex call MAP()
 endif
 
 "vue
