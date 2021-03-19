@@ -39,7 +39,6 @@ uninstall:
 	rm -f  $(VIMRC)            && echo "    - Removed $(VIMRC)"; \
 	rm -f  $(NVIMRC)           && echo "    - Removed $(NVIMRC)"; \
 	rm -rf $(DOTVIM)           && echo "    - Removed $(DOTVIM)"; \
-	rm -rf ~/.$(APP)           && echo "    - Removed ~/.$(APP)"; \
 	echo -e "\033[32m[✔]\033[0m Successfully uninstalled $(APP)"
 
 .PHONY: help vim neovim update uninstall

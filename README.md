@@ -15,8 +15,8 @@ IceVim
 cd ~
 mv .vimrc .vimrc.bak
 mv .vim .vim.bak
-git clone https://github.com/VimIcewind/IceVim.git .IceVim
-cd .IceVim
+git clone https://github.com/VimIcewind/IceVim
+cd IceVim
 make vim
 ```
 
