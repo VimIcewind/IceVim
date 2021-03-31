@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-19 16:10:35
+"Last Modified: 2021-03-31 16:11:42
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1269,8 +1269,8 @@ nnoremap gB :bNext<CR>
 map <C-Q> <plug>NERDCommenterToggle
 
 "------------------Emmet设置------------------
-"<C-_>,
-let g:user_emmet_leader_key = '<C-_>'
+"<C-j>,
+let g:user_emmet_leader_key = '<C-j>'
 
 "------------------web-indent设置------------------
 "Disable Logging
