@@ -1,4 +1,4 @@
-"Last Modified: 2021-03-31 16:11:42
+"Last Modified: 2021-04-07 21:11:18
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -77,6 +77,8 @@ if has("gui_running")
     endif
     "设置默认的当前目录为用户家目录
     cd ~
+else
+    set guifont=Consolas\ for\ Powerline\ FixedD:h11
 endif
 
 "窗口最大化
