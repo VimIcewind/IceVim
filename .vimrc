@@ -1,4 +1,4 @@
-"Last Modified: 2021-04-16 16:53:23
+"Last Modified: 2021-04-16 17:00:18
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -748,8 +748,8 @@ endfunc
 "运行scheme源文件
 func! RunSS()
     exec "update"
-    "exec "!scheme -q < %"
-    exec "!scheme --script %"
+    "exec "!scheme --script %"
+    exec "!scheme -q < %"
 endfunc
 
 "预览htm、html、xhtml结果
