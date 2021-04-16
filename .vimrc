@@ -1,4 +1,4 @@
-"Last Modified: 2021-04-16 15:03:51
+"Last Modified: 2021-04-16 16:53:23
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -526,7 +526,10 @@ endfunc
 "编译scheme源文件
 func! CompileSS()
     exec "update"
-    exec "!echo '\(compile-file \"%\"\)' | scheme -q"
+    "exec "!echo '\(compile-file \"%\"\)' | scheme -q"
+    set makeprg=echo\ '(compile-file\ \"%\")'\ \\\|\ scheme\ -q
+    exec "make"
+    set makeprg=make
 endfunc
 
 "汇编、连接asm源文件
