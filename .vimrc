@@ -1,4 +1,4 @@
-"Last Modified: 2021-09-13 16:10:01
+"Last Modified: 2021-09-13 16:35:25
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -536,10 +536,10 @@ endfunc
 func! CompileAsm()
     if MySys() == "Windows"
         exec "update"
-        set makeprg=nasm\ -f\ win64\ -g\ -F\ stabs\ -o\ %<.obj\ %
+        set makeprg=nasm\ -f\ win64\ -g\ -o\ %<.obj\ %
         exec "make"
         if getqflist() == []
-            set makeprg=gcc\ -o\ %<.exe\ %<.o
+            set makeprg=gcc\ -o\ %<.exe\ %<.obj
             exec "make"
             set makeprg=make
         endif
@@ -598,7 +598,7 @@ func! ReleaseCompileAsm()
         set makeprg=nasm\ -f\ win64\ -o\ %<.obj\ %
         exec "make"
         if getqflist() == []
-            set makeprg=gcc\ -o\ %<.exe\ %<.o
+            set makeprg=gcc\ -o\ %<.exe\ %<.obj
             exec "make"
             set makeprg=make
         endif
