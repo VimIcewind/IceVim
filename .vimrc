@@ -1,4 +1,4 @@
-"Last Modified: 2021-04-16 17:00:18
+"Last Modified: 2021-09-13 16:10:01
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -536,16 +536,16 @@ endfunc
 func! CompileAsm()
     if MySys() == "Windows"
         exec "update"
-        set makeprg=nasm\ -f\ elf\ -g\ -F\ stabs\ -o\ %<.o\ %
+        set makeprg=nasm\ -f\ win64\ -g\ -F\ stabs\ -o\ %<.obj\ %
         exec "make"
         if getqflist() == []
-            set makeprg=ld\ -o\ %<.exe\ %<.o
+            set makeprg=gcc\ -o\ %<.exe\ %<.o
             exec "make"
             set makeprg=make
         endif
     elseif MySys() == "Linux"
         exec "update"
-        set makeprg=nasm\ -f\ elf\ -g\ -F\ stabs\ -o\ %<.o\ %
+        set makeprg=nasm\ -f\ elf64\ -g\ -F\ stabs\ -o\ %<.o\ %
         exec "make"
         if getqflist() == []
             set makeprg=ld\ -o\ %<\ %<.o
@@ -595,16 +595,16 @@ endfunc
 func! ReleaseCompileAsm()
     if MySys() == "Windows"
         exec "update"
-        set makeprg=nasm\ -f\ elf\ -o\ %<.o\ %
+        set makeprg=nasm\ -f\ win64\ -o\ %<.obj\ %
         exec "make"
         if getqflist() == []
-            set makeprg=ld\ -o\ %<.exe\ %<.o
+            set makeprg=gcc\ -o\ %<.exe\ %<.o
             exec "make"
             set makeprg=make
         endif
     elseif MySys() == "Linux"
         exec "update"
-        set makeprg=nasm\ -f\ elf\ -o\ %<.o\ %
+        set makeprg=nasm\ -f\ elf64\ -o\ %<.o\ %
         exec "make"
         if getqflist() == []
             set makeprg=ld\ -o\ %<\ %<.o
@@ -1085,7 +1085,7 @@ endfunc
 
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
-    autocmd FileType c,cpp,objc,java,cs,scala,go,rust,make call MAP()
+    autocmd FileType c,cpp,objc,java,cs,scala,go,rust,asm,make call MAP()
     autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,lisp,scheme,tex,latex call MAP()
