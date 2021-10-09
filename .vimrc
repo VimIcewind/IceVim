@@ -1,4 +1,4 @@
-"Last Modified: 2021-10-09 10:27:37
+"Last Modified: 2021-10-09 11:09:27
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -269,10 +269,13 @@ if has("autocmd")
 endif
 
 ""设置缩进和Tab
+"set sw=4 sts=4 ts=4 expandtab
 set sw=8 sts=8 ts=8 smarttab
 set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,l0,b0,gs,hs,p0,t0,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j1,J1,)20,*70,#0
 "编辑一个文件时，直接用相应的缩进风格
 if has("autocmd")
+    "autocmd FileType go,make set sw=8 sts=8 ts=8 smarttab
+    "autocmd FileType c,cpp,java,groovy,ant set sw=4 sts=4 ts=4 expandtab
     autocmd FileType c,cpp,go,make set sw=8 sts=8 ts=8 smarttab
     autocmd FileType java,groovy,ant set sw=4 sts=4 ts=4 expandtab
     autocmd FileType sh,python,perl,ruby,php set sw=4 sts=4 ts=4 expandtab
