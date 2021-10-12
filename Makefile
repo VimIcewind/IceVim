@@ -16,7 +16,7 @@ help:
 vim:
 	@echo -e "\033[1;34m==>\033[0m Trying to install IceVim for Vim"; \
 	[ ! -f $(VIMRC) ]  && cp    $(ICEVIM) $(VIMRC)      && echo "    - Created $(VIMRC) "; \
-	[ ! -f $(DOTVIM) ] && cp -r $(ICEDOTVIM) $(DOTVIM)/..  && echo "    - Created $(DOTVIM) "; \
+	[ ! -f $(DOTVIM) ] && cp -r $(ICEDOTVIM) ~  && echo "    - Created $(DOTVIM) "; \
 	vim  +'PlugInstall' +qall; \
 	echo -e "\033[32m[✔]\033[0m Successfully installed $(APP) for Vim!"
 
@@ -24,7 +24,7 @@ neovim:
 	@echo -e "\033[1;34m==>\033[0m Trying to install IceVim for NeoVim"; \
 	mkdir -p ~/.config/nvim; \
 	[ ! -f $(NVIMRC) ] && cp    $(ICEVIM) $(NVIMRC)     && echo "    - Created $(NVIMRC)"; \
-	[ ! -f $(DOTVIM) ] && cp -r $(ICEDOTVIM) $(DOTVIM)/..  && echo "    - Created $(DOTVIM) "; \
+	[ ! -f $(DOTVIM) ] && cp -r $(ICEDOTVIM) ~  && echo "    - Created $(DOTVIM) "; \
 	nvim +'PlugInstall' +qall; \
 	echo -e "\033[32m[✔]\033[0m Successfully installed $(APP) for NeoVim!"
 
