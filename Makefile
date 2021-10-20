@@ -32,9 +32,15 @@ update:
 	@echo -e "\033[1;34m==>\033[0m Trying to update IceVim"; \
 	git pull origin master; \
 	[ -f $(VIMRC)  ]  && cp -f   $(ICEVIM) $(VIMRC)      && echo "    - Updated $(VIMRC) "; \
+	echo -e "\033[32m[✔]\033[0m Successfully updated $(APP)"
+
+upgrade:
+	@echo -e "\033[1;34m==>\033[0m Trying to upgrade IceVim"; \
+	git pull origin master; \
+	[ -f $(VIMRC)  ]  && cp -f   $(ICEVIM) $(VIMRC)      && echo "    - Updated $(VIMRC) "; \
 	vim  +'PlugUpgrade' +qall; \
 	vim  +'PlugUpdate' +qall; \
-	echo -e "\033[32m[✔]\033[0m Successfully updated $(APP)"
+	echo -e "\033[32m[✔]\033[0m Successfully upgraded $(APP)"
 
 uninstall:
 	@echo -e "\033[1;34m==>\033[0m Trying to uninstall IceVim"; \
