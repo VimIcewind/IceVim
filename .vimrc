@@ -1,4 +1,4 @@
-"Last Modified: 2021-10-20 11:43:50
+"Last Modified: 2021-10-20 13:06:29
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -533,8 +533,10 @@ func! CompileSS()
     if MySys() == "Windows"
         exec "update"
         "exec "!echo '\(compile-file \"%\"\)' | scheme -q"
+        set shellxquote=
         set makeprg=echo\ (compile-file\ \"%\")\ \\\|\ scheme\ -q
         exec "make"
+        set shellxquote=(
         set makeprg=make
     elseif MySys() == "Linux"
         exec "update"
