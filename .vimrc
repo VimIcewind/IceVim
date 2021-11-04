@@ -1,4 +1,4 @@
-"Last Modified: 2021-10-20 13:06:29
+"Last Modified: 2021-11-04 14:23:24
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -113,12 +113,12 @@ set fenc=utf-8
 set fileformat=unix
 set fileformats=unix,dos
 "如果Linux系统编码包含GB(GBK,gbk,GB2312,gb2312,GB18030,gb18030), 则Vim内部编码cp936, 文件编码默认cp936
-if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
-    "Vim内部使用的编码
-    set enc=cp936
-    "文件编码设置fileencoding
-    set fenc=cp936
-endif
+"if MySys() == "Linux" && match(toupper(system("echo $LANG")), "GB") > 0
+"    "Vim内部使用的编码
+"    set enc=cp936
+"    "文件编码设置fileencoding
+"    set fenc=cp936
+"endif
 "Notice: 如果vim自动侦测编码出现error时可能还是会中文乱码,
 "此时可以手动指定打开文件的编码为gbk等,实例如下所示
 ":e ++enc=cp936
