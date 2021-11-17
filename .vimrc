@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-17 14:54:36
+"Last Modified: 2021-11-17 14:59:05
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -993,8 +993,7 @@ func! SetJavaRunType()
                 let g:dirstr = g:dirstr . "/.."
                 let dircount -= 1
             endwhile
-            let execstr="!start cmd /C \"cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe execstr
+            :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"." && pause\""
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') == 0
