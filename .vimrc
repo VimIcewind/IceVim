@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-17 12:30:15
+"Last Modified: 2021-11-17 12:36:03
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1030,7 +1030,7 @@ func! SetJavaRunType()
         else
             silent exec "norm gg/package/s+8"
             if count(expand('<cfile>'), '.') == 0
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exec !cd .. && java ".expand('<cfile>').".%<"." <args>"
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd .. && java ".expand('<cfile>').".%<"." <args>"
             elseif count(expand('<cfile>'), '.') == 1
                 :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../.. && java ".expand('<cfile>').".%<"." <args>"
             elseif count(expand('<cfile>'), '.') == 2
