@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-17 10:42:32
+"Last Modified: 2021-11-17 10:58:23
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -598,7 +598,7 @@ endfunc
 func! ReleaseCompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
-        set makeprg=javac\ -d\ ../..\ %
+        set makeprg=javac\ -d\ ../../..\ %
     else
         set makeprg=javac\ -d\ .\ %
     endif
@@ -958,7 +958,7 @@ func! SetJavaRunType()
         :command! -nargs=? Run :exe "!start cmd /C \"java %< && pause\""
     else
         ":command! -nargs=? Run :exe "normal gg/package/s+8<CR>:noh<CR>"|:exe "!java ".expand('<cfile>').".%< <args>"
-        :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+        :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
     endif
 endfunc
 
