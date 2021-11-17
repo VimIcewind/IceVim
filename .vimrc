@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-17 10:58:23
+"Last Modified: 2021-11-17 12:30:15
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -472,7 +472,20 @@ endfunc
 func! CompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
-        set makeprg=javac\ -g\ -d\ ../../..\ %
+        exec "norm gg/package/s+8"
+        if count(expand('<cfile>'), '.') == 0
+            set makeprg=javac\ -g\ -d\ ..\ %
+        elseif count(expand('<cfile>'), '.') == 1
+            set makeprg=javac\ -g\ -d\ ../..\ %
+        elseif count(expand('<cfile>'), '.') == 2
+            set makeprg=javac\ -g\ -d\ ../../..\ %
+        elseif count(expand('<cfile>'), '.') == 3
+            set makeprg=javac\ -g\ -d\ ../../../..\ %
+        elseif count(expand('<cfile>'), '.') == 4
+            set makeprg=javac\ -g\ -d\ ../../../../..\ %
+        elseif count(expand('<cfile>'), '.') == 5
+            set makeprg=javac\ -g\ -d\ ../../../../../..\ %
+        endif
     else
         set makeprg=javac\ -g\ -d\ .\ %
     endif
@@ -598,7 +611,20 @@ endfunc
 func! ReleaseCompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
-        set makeprg=javac\ -d\ ../../..\ %
+        exec "norm gg/package/s+8"
+        if count(expand('<cfile>'), '.') == 0
+            set makeprg=javac\ -g\ -d\ ..\ %
+        elseif count(expand('<cfile>'), '.') == 1
+            set makeprg=javac\ -g\ -d\ ../..\ %
+        elseif count(expand('<cfile>'), '.') == 2
+            set makeprg=javac\ -g\ -d\ ../../..\ %
+        elseif count(expand('<cfile>'), '.') == 3
+            set makeprg=javac\ -g\ -d\ ../../../..\ %
+        elseif count(expand('<cfile>'), '.') == 4
+            set makeprg=javac\ -g\ -d\ ../../../../..\ %
+        elseif count(expand('<cfile>'), '.') == 5
+            set makeprg=javac\ -g\ -d\ ../../../../../..\ %
+        endif
     else
         set makeprg=javac\ -d\ .\ %
     endif
@@ -664,8 +690,20 @@ func! RunJava()
         if search('^\s*package\s\+.*;$', 'pw') > 0
             "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
             "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
-            "exec "norm gg/package/s+8" | exec "!start cmd /C \"java ".expand('<cfile>').".%<"." && pause\""
-            exec "norm gg/package/s+8" | exec "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." && pause\""
+            exec "norm gg/package/s+8"
+            if count(expand('<cfile>'), '.') == 0
+                exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 1
+                exec "!start cmd /C \"cd ../.. && java ".expand('<cfile>').".%<"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 2
+                exec "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 3
+                exec "!start cmd /C \"cd ../../../.. && java ".expand('<cfile>').".%<"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 4
+                exec "!start cmd /C \"cd ../../../../.. && java ".expand('<cfile>').".%<"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 5
+                exec "!start cmd /C \"cd ../../../../../.. && java ".expand('<cfile>').".%<"." && pause\""
+            endif
             exec "norm gg"
         else
             "exec "!java %<"
@@ -675,8 +713,20 @@ func! RunJava()
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') > 0
-            "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
-            exec "norm gg/package/s+8" | exec "!cd ../../.. && java ".expand('<cfile>').".%<"
+            exec "norm gg/package/s+8"
+            if count(expand('<cfile>'), '.') == 0
+                exec "!cd .. && java ".expand('<cfile>').".%<"
+            elseif count(expand('<cfile>'), '.') == 1
+                exec "!cd ../.. && java ".expand('<cfile>').".%<"
+            elseif count(expand('<cfile>'), '.') == 2
+                exec "!cd ../../.. && java ".expand('<cfile>').".%<"
+            elseif count(expand('<cfile>'), '.') == 3
+                exec "!cd ../../../.. && java ".expand('<cfile>').".%<"
+            elseif count(expand('<cfile>'), '.') == 4
+                exec "!cd ../../../../.. && java ".expand('<cfile>').".%<"
+            elseif count(expand('<cfile>'), '.') == 5
+                exec "!cd ../../../../../.. && java ".expand('<cfile>').".%<"
+            endif
             exec "norm gg"
         else
             exec "!java %<"
@@ -953,12 +1003,46 @@ if has("autocmd")
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
 endif
 func! SetJavaRunType()
-    if search('^\s*package\s\+.*;$', 'pw') == 0
-        ":command! -nargs=? Run :!java %< <args>
-        :command! -nargs=? Run :exe "!start cmd /C \"java %< && pause\""
-    else
-        ":command! -nargs=? Run :exe "normal gg/package/s+8<CR>:noh<CR>"|:exe "!java ".expand('<cfile>').".%< <args>"
-        :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+    if MySys() == "Windows"
+        if search('^\s*package\s\+.*;$', 'pw') == 0
+            ":command! -nargs=? Run :!java %< <args>
+            :command! -nargs=? Run :exe "!start cmd /C \"java %<"." <args>"." && pause\""
+        else
+            silent exec "norm gg/package/s+8"
+            if count(expand('<cfile>'), '.') == 0
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 1
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd ../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 2
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 3
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd ../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 4
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd ../../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            elseif count(expand('<cfile>'), '.') == 5
+                :command! -nargs=? Run :exec "norm gg/package/s+8^M" |:exe "!start cmd /C \"cd ../../../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            endif
+        endif
+    elseif MySys() == "Linux"
+        if search('^\s*package\s\+.*;$', 'pw') == 0
+            ":command! -nargs=? Run :!java %< <args>
+            :command! -nargs=? Run :exe "!java %<"." <args>"
+        else
+            silent exec "norm gg/package/s+8"
+            if count(expand('<cfile>'), '.') == 0
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exec !cd .. && java ".expand('<cfile>').".%<"." <args>"
+            elseif count(expand('<cfile>'), '.') == 1
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../.. && java ".expand('<cfile>').".%<"." <args>"
+            elseif count(expand('<cfile>'), '.') == 2
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../.. && java ".expand('<cfile>').".%<"." <args>"
+            elseif count(expand('<cfile>'), '.') == 3
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../.. && java ".expand('<cfile>').".%<"." <args>"
+            elseif count(expand('<cfile>'), '.') == 4
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../../.. && java ".expand('<cfile>').".%<"." <args>"
+            elseif count(expand('<cfile>'), '.') == 5
+                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../../../.. && java ".expand('<cfile>').".%<"." <args>"
+            endif
+        endif
     endif
 endfunc
 
