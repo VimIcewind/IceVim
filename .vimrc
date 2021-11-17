@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-17 12:47:14
+"Last Modified: 2021-11-17 14:54:36
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -473,19 +473,13 @@ func! CompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
         exec "norm gg/package/s+8"
-        if count(expand('<cfile>'), '.') == 0
-            set makeprg=javac\ -g\ -d\ ..\ %
-        elseif count(expand('<cfile>'), '.') == 1
-            set makeprg=javac\ -g\ -d\ ../..\ %
-        elseif count(expand('<cfile>'), '.') == 2
-            set makeprg=javac\ -g\ -d\ ../../..\ %
-        elseif count(expand('<cfile>'), '.') == 3
-            set makeprg=javac\ -g\ -d\ ../../../..\ %
-        elseif count(expand('<cfile>'), '.') == 4
-            set makeprg=javac\ -g\ -d\ ../../../../..\ %
-        elseif count(expand('<cfile>'), '.') == 5
-            set makeprg=javac\ -g\ -d\ ../../../../../..\ %
-        endif
+        let dircount = count(expand('<cfile>'), '.')
+        let dirstr = ".."
+        while dircount > 0
+            let dirstr = dirstr . "/.."
+            let dircount -= 1
+        endwhile
+        let &makeprg="javac\ -g\ -d ".dirstr."\ %"
     else
         set makeprg=javac\ -g\ -d\ .\ %
     endif
@@ -612,19 +606,13 @@ func! ReleaseCompileJava()
     exec "update"
     if search('^\s*package\s\+.*;$', 'pw') > 0
         exec "norm gg/package/s+8"
-        if count(expand('<cfile>'), '.') == 0
-            set makeprg=javac\ -g\ -d\ ..\ %
-        elseif count(expand('<cfile>'), '.') == 1
-            set makeprg=javac\ -g\ -d\ ../..\ %
-        elseif count(expand('<cfile>'), '.') == 2
-            set makeprg=javac\ -g\ -d\ ../../..\ %
-        elseif count(expand('<cfile>'), '.') == 3
-            set makeprg=javac\ -g\ -d\ ../../../..\ %
-        elseif count(expand('<cfile>'), '.') == 4
-            set makeprg=javac\ -g\ -d\ ../../../../..\ %
-        elseif count(expand('<cfile>'), '.') == 5
-            set makeprg=javac\ -g\ -d\ ../../../../../..\ %
-        endif
+        let dircount = count(expand('<cfile>'), '.')
+        let dirstr = ".."
+        while dircount > 0
+            let dirstr = dirstr . "/.."
+            let dircount -= 1
+        endwhile
+        let &makeprg="javac\ -g\ -d ".dirstr."\ %"
     else
         set makeprg=javac\ -d\ .\ %
     endif
@@ -691,19 +679,14 @@ func! RunJava()
             "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
             "exec "norm gg/package/s+8" | exec "!start java " . expand('<cfile>') . ".%<"
             exec "norm gg/package/s+8"
-            if count(expand('<cfile>'), '.') == 0
-                exec "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 1
-                exec "!start cmd /C \"cd ../.. && java ".expand('<cfile>').".%<"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 2
-                exec "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 3
-                exec "!start cmd /C \"cd ../../../.. && java ".expand('<cfile>').".%<"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 4
-                exec "!start cmd /C \"cd ../../../../.. && java ".expand('<cfile>').".%<"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 5
-                exec "!start cmd /C \"cd ../../../../../.. && java ".expand('<cfile>').".%<"." && pause\""
-            endif
+            let dircount = count(expand('<cfile>'), '.')
+            let dirstr = ".."
+            while dircount > 0
+                let dirstr = dirstr . "/.."
+                let dircount -= 1
+            endwhile
+            let execstr="!start cmd /C \"cd ".dirstr." && java ".expand('<cfile>').".%<"." && pause\""
+            exec execstr
             exec "norm gg"
         else
             "exec "!java %<"
@@ -714,19 +697,14 @@ func! RunJava()
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') > 0
             exec "norm gg/package/s+8"
-            if count(expand('<cfile>'), '.') == 0
-                exec "!cd .. && java ".expand('<cfile>').".%<"
-            elseif count(expand('<cfile>'), '.') == 1
-                exec "!cd ../.. && java ".expand('<cfile>').".%<"
-            elseif count(expand('<cfile>'), '.') == 2
-                exec "!cd ../../.. && java ".expand('<cfile>').".%<"
-            elseif count(expand('<cfile>'), '.') == 3
-                exec "!cd ../../../.. && java ".expand('<cfile>').".%<"
-            elseif count(expand('<cfile>'), '.') == 4
-                exec "!cd ../../../../.. && java ".expand('<cfile>').".%<"
-            elseif count(expand('<cfile>'), '.') == 5
-                exec "!cd ../../../../../.. && java ".expand('<cfile>').".%<"
-            endif
+            let dircount = count(expand('<cfile>'), '.')
+            let dirstr = ".."
+            while dircount > 0
+                let dirstr = dirstr . "/.."
+                let dircount -= 1
+            endwhile
+            let execstr="!cd ".dirstr." && java ".expand('<cfile>').".%<"
+            exec execstr
             exec "norm gg"
         else
             exec "!java %<"
@@ -1009,19 +987,14 @@ func! SetJavaRunType()
             :command! -nargs=? Run :exe "!start cmd /C \"java %<"." <args>"." && pause\""
         else
             silent exec "norm gg/package/s+8"
-            if count(expand('<cfile>'), '.') == 0
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd .. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 1
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 2
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 3
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 4
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            elseif count(expand('<cfile>'), '.') == 5
-                :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ../../../../../.. && java ".expand('<cfile>').".%<"." <args>"." && pause\""
-            endif
+            let dircount = count(expand('<cfile>'), '.')
+            let g:dirstr = ".."
+            while dircount > 0
+                let g:dirstr = g:dirstr . "/.."
+                let dircount -= 1
+            endwhile
+            let execstr="!start cmd /C \"cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe execstr
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') == 0
@@ -1029,19 +1002,13 @@ func! SetJavaRunType()
             :command! -nargs=? Run :exe "!java %<"." <args>"
         else
             silent exec "norm gg/package/s+8"
-            if count(expand('<cfile>'), '.') == 0
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd .. && java ".expand('<cfile>').".%<"." <args>"
-            elseif count(expand('<cfile>'), '.') == 1
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../.. && java ".expand('<cfile>').".%<"." <args>"
-            elseif count(expand('<cfile>'), '.') == 2
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../.. && java ".expand('<cfile>').".%<"." <args>"
-            elseif count(expand('<cfile>'), '.') == 3
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../.. && java ".expand('<cfile>').".%<"." <args>"
-            elseif count(expand('<cfile>'), '.') == 4
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../../.. && java ".expand('<cfile>').".%<"." <args>"
-            elseif count(expand('<cfile>'), '.') == 5
-                :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ../../../../../.. && java ".expand('<cfile>').".%<"." <args>"
-            endif
+            let dircount = count(expand('<cfile>'), '.')
+            let g:dirstr = ".."
+            while dircount > 0
+                let g:dirstr = g:dirstr . "/.."
+                let dircount -= 1
+            endwhile
+            :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"
         endif
     endif
 endfunc
