@@ -1,4 +1,4 @@
-"Last Modified: 2021-11-22 21:31:56
+"Last Modified: 2021-12-03 21:54:33
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1081,8 +1081,8 @@ if exists("+syntax")
     map <F6> <Esc>:colorscheme peachpuff<CR>v<Esc>
     imap <F6> <C-O>:colorscheme peachpuff<CR>
     "colorscheme desert
-    map <F7> <Esc>:colorscheme darkslategrey<CR>v<Esc>
-    imap <F7> <C-O>:colorscheme darkslategrey<CR>
+    map <F7> <Esc>:colorscheme desert<CR>v<Esc>
+    imap <F7> <C-O>:colorscheme desert<CR>
     "colorscheme torte
     map <F8> <Esc>:colorscheme torte<CR>v<Esc>
     imap <F8> <C-O>:colorscheme torte<CR>
