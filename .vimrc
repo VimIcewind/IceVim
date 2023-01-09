@@ -1,4 +1,4 @@
-"Last Modified: 2022-09-11 18:50:57
+"Last Modified: 2023-01-09 10:38:40
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -975,6 +975,8 @@ func! RunResult()
     elseif &filetype == "xhtml"
         exec "call RunHtml()"
     elseif &filetype == "css"
+        exec "call RunHtml()"
+    elseif &filetype == "xml"
         exec "call RunHtml()"
     endif
 endfunc
