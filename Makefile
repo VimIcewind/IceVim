@@ -11,6 +11,7 @@ help:
 	@echo "    vim         Install IceVim for Vim"
 	@echo "    neovim      Install IceVim for NeoVim"
 	@echo "    update      Update IceVim"
+	@echo "    upgrade     Update IceVim and plugin"
 	@echo "    uninstall   Uninstall IceVim"
 
 vim:
