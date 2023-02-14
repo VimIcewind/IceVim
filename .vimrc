@@ -1,4 +1,4 @@
-"Last Modified: 2023-01-09 10:38:40
+"Last Modified: 2023-02-14 15:04:51
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -475,6 +475,7 @@ endfunc
 "编译java源文件
 func! CompileJava()
     exec "update"
+    silent exec "norm mvMmm"
     if search('^\s*package\s\+.*;$', 'pw') > 0
         exec "norm gg/package/s+8"
         let dircount = count(expand('<cfile>'), '.')
@@ -487,6 +488,7 @@ func! CompileJava()
     else
         set makeprg=javac\ -g\ -d\ .\ %
     endif
+    silent exec "norm 'm`v"
     exec "make"
     set makeprg=make
 endfunc
@@ -608,6 +610,7 @@ endfunc
 "编译Java源文件
 func! ReleaseCompileJava()
     exec "update"
+    silent exec "norm mvMmm"
     if search('^\s*package\s\+.*;$', 'pw') > 0
         exec "norm gg/package/s+8"
         let dircount = count(expand('<cfile>'), '.')
@@ -620,6 +623,7 @@ func! ReleaseCompileJava()
     else
         set makeprg=javac\ -d\ .\ %
     endif
+    silent exec "norm 'm`v"
     exec "make"
     set makeprg=make
 endfunc
@@ -678,6 +682,7 @@ endfunc
 
 "运行java类文件
 func! RunJava()
+    silent exec "norm mvMmm"
     if MySys() == "Windows"
         if search('^\s*package\s\+.*;$', 'pw') > 0
             "exec "norm gg/package/s+8" | exec "!java " . expand('<cfile>') . ".%<"
@@ -691,7 +696,6 @@ func! RunJava()
             endwhile
             let execstr="!start cmd /C \"cd ".dirstr." && java ".expand('<cfile>').".%<"." && pause\""
             exec execstr
-            exec "norm gg"
         else
             "exec "!java %<"
             "exec "!start java %<"
@@ -709,11 +713,11 @@ func! RunJava()
             endwhile
             let execstr="!cd ".dirstr." && java ".expand('<cfile>').".%<"
             exec execstr
-            exec "norm gg"
         else
             exec "!java %<"
         endif
     endif
+    silent exec "norm 'm`v"
 endfunc
 
 "运行C#类文件
@@ -987,6 +991,7 @@ if has("autocmd")
     autocmd BufReadPost,BufWritePost *.java call SetJavaRunType()
 endif
 func! SetJavaRunType()
+    silent exec "norm mvMmm"
     if MySys() == "Windows"
         if search('^\s*package\s\+.*;$', 'pw') == 0
             ":command! -nargs=? Run :!java %< <args>
@@ -999,7 +1004,7 @@ func! SetJavaRunType()
                 let g:dirstr = g:dirstr . "/.."
                 let dircount -= 1
             endwhile
-            :command! -nargs=? Run :exec "norm gg/package/s+8" |:exe "!start cmd /C \"cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"." && pause\""
+            :command! -nargs=? Run :exec "norm mvMmmgg/package/s+8" |:exe "!start cmd /C \"cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"." && pause\"" |:exe "norm 'm`v" |:exe "nohlsearch"
         endif
     elseif MySys() == "Linux"
         if search('^\s*package\s\+.*;$', 'pw') == 0
@@ -1013,9 +1018,10 @@ func! SetJavaRunType()
                 let g:dirstr = g:dirstr . "/.."
                 let dircount -= 1
             endwhile
-            :command! -nargs=? Run :exe "norm gg/package/s+8" |:exe "!cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>"
+            :command! -nargs=? Run :exe "norm mvMmmgg/package/s+8" |:exe "!cd ".g:dirstr." && java ".expand('<cfile>').".%<"." <args>" |:exe "norm 'm`v" |:exe "nohlsearch"
         endif
     endif
+    silent exec "norm 'm`v"
 endfunc
 
 ""设置快捷键
