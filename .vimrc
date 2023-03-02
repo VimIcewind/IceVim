@@ -1,4 +1,4 @@
-"Last Modified: 2023-02-14 15:04:51
+"Last Modified: 2023-03-02 14:52:31
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1400,3 +1400,41 @@ nmap <space>tn :set nu!<CR>
 nmap <space>sc :noh<CR>
 nmap <space><tab> :e #<CR>
 nmap <space>qq :q!<CR>
+nmap <space>TM :call ToggleMaximize()<CR>
+nmap <space>TT :call ToggleAlpha()<CR>:normal v:normal<ESC>
+nmap <space>TF :call ToggleFullScreen()<CR>:normal v:normal<ESC>
+
+let w:ismaxsize = 0
+func! ToggleMaximize()
+    if MySys() == "Windows"
+        if w:ismaxsize == 0
+            :simalt ~x
+            let w:ismaxsize = 1
+        else
+            :simalt ~r
+            let w:ismaxsize = 0
+        endif
+    elseif MySys() == "Linux"
+    endif
+endfunc
+
+let w:isalpha = 0
+func! ToggleAlpha()
+    if MySys() == "Windows"
+        if w:isalpha == 0
+            :call libcallnr("vimtweak.dll", "SetAlpha", 180)
+            let w:isalpha = 1
+        else
+            :call libcallnr("vimtweak.dll", "SetAlpha", 255)
+            let w:isalpha = 0
+        endif
+    elseif MySys() == "Linux"
+    endif
+endfunc
+
+func! ToggleFullScreen()
+    if MySys() == "Windows"
+        :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
+    elseif MySys() == "Linux"
+    endif
+endfunc
