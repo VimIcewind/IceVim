@@ -1,4 +1,4 @@
-"Last Modified: 2023-06-16 16:16:05
+"Last Modified: 2023-10-10 11:16:30
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1082,8 +1082,11 @@ if exists("+syntax")
         "主题默认设置
         colorscheme torte
     else
-        "colorscheme desert
-        colorscheme torte
+        if v:version < 900
+            colorscheme desert
+        else
+            colorscheme torte
+        endif
     endif
     "colorscheme default
     map <F5> <Esc>:colorscheme default<CR>v<Esc>
