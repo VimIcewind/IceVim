@@ -1,4 +1,4 @@
-"Last Modified: 2023-10-10 11:16:30
+"Last Modified: 2023-11-11 18:18:19
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -49,7 +49,7 @@ if has("gui_running")
         "1440x900
         "winpos 392 180
         "1920x1080 125%
-        "winpos 543 216
+        "winpos 555 214
         "1920x1080
         "winpos 630 280
     elseif MySys() == "Linux"
