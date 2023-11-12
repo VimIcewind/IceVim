@@ -1,4 +1,4 @@
-"Last Modified: 2023-11-11 18:18:19
+"Last Modified: 2023-11-12 12:43:50
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1391,6 +1391,7 @@ imap <F4> <C-O>:WMToggle<CR>:set nu!<CR>
 
 ""模拟spacemacs快捷键
 nmap <space>' :term<CR>
+nmap <space>/ :call Vimgrep()<CR>
 nmap <space>bb :b  <BS>
 nmap <space>bd :bd!<CR>
 nmap <space>fc :saveas  <BS>
@@ -1406,6 +1407,10 @@ nmap <space>qq :q!<CR>
 nmap <space>TM :call ToggleMaximize()<CR>
 nmap <space>TT :call ToggleAlpha()<CR>:normal v:normal<ESC>
 nmap <space>TF :call ToggleFullScreen()<CR>:normal v:normal<ESC>
+
+func! Vimgrep()
+    exec "vimgrep ".expand('<cword>')." ../** | copen"
+endfunc
 
 let w:ismaxsize = 0
 func! ToggleMaximize()
