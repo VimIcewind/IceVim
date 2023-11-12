@@ -1,4 +1,4 @@
-"Last Modified: 2023-11-12 13:21:04
+"Last Modified: 2023-11-12 18:35:55
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1409,7 +1409,9 @@ nmap <space>TT :call ToggleAlpha()<CR>:normal v:normal<ESC>
 nmap <space>TF :call ToggleFullScreen()<CR>:normal v:normal<ESC>
 
 func! Vimgrep()
-    exec "vimgrep ".expand('<cword>')." ".split(&path, ',')[0]." | copen"
+    exec "vimgrep ".expand('<cword>')." ".split(&path, ',')[0]
+    exec "normal "
+    exec "copen"
 endfunc
 
 let w:ismaxsize = 0
