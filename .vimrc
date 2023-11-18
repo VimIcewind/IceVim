@@ -1,4 +1,4 @@
-"Last Modified: 2023-11-12 18:35:55
+"Last Modified: 2023-11-18 11:16:58
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -53,8 +53,10 @@ if has("gui_running")
         "1920x1080
         "winpos 630 280
     elseif MySys() == "Linux"
+        "1366x768
         winpos 360 150
-        "winpos 636 280
+        "1920x1080
+        "winpos 560 200
     endif
     "设置GUI窗口的大小
     set lines=25
