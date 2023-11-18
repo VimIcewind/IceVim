@@ -1,4 +1,4 @@
-"Last Modified: 2023-11-18 11:16:58
+"Last Modified: 2023-11-18 11:27:53
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -74,8 +74,11 @@ if has("gui_running")
     ""字体相关设置
     if MySys() == "Linux"
         "显示的字体
+        "1366x768
         set guifont=Monospace\ 10
         "set guifont=Nimbus\ Mono\ L\ 10
+        "1920x1080
+        "set guifont=Monospace\ 13
     elseif MySys() == "Windows"
         "显示的字体
         "set guifont=Consolas:h11:cANSI
