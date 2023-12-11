@@ -1,4 +1,4 @@
-"Last Modified: 2023-11-18 11:27:53
+"Last Modified: 2023-12-11 18:55:29
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -293,7 +293,7 @@ if has("autocmd")
     autocmd FileType htm,html,xhtml,xml,jsp set sw=4 sts=4 ts=4 expandtab
     autocmd FileType typescript,javascript,json,vue set sw=4 sts=4 ts=4 expandtab
     autocmd FileType vim,tex,latex,sql set sw=4 sts=4 ts=8 expandtab
-    autocmd FileType lisp,scheme set nocindent lisp expandtab
+    autocmd FileType lisp,scheme set sw=2 sts=2 ts=2 nocindent lisp expandtab
 endif
 
 "Longline Linux 风格缩进
