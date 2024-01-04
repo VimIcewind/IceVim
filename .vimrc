@@ -1,4 +1,4 @@
-"Last Modified: 2023-12-11 18:55:29
+"Last Modified: 2024-01-04 23:06:23
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1385,6 +1385,9 @@ let g:gutentags_ctags_extra_args += ['--langmap=c:.c.pc,scheme:+.ss']
 "let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 "let g:gutentags_ctags_extra_args += ['--java-kinds=+px']
 "let g:gutentags_ctags_extra_args += ['--languages=c,c++,java']
+
+""------------------AutoPair--------------------
+autocmd Filetype lisp,scheme let b:AutoPairs = {'`': '`', '"': '"', '{': '}',  '(': ')', '[': ']'}
 
 ""插件的快捷键设置
 map <F2> <Esc>:NERDTreeToggle<CR>
