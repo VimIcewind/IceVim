@@ -1,4 +1,4 @@
-"Last Modified: 2024-01-11 12:06:19
+"Last Modified: 2024-01-12 10:41:46
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -43,7 +43,9 @@ endfunc
 
 if has("gui_running")
     "设置GUI窗口位置
-    if MySys() == "Windows"
+    if has("nvim")
+        " NeoVim 暂不支持 winpos
+    elseif MySys() == "Windows"
         "1366x768
         winpos 354 120
         "1440x900
