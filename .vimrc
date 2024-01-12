@@ -1,4 +1,4 @@
-"Last Modified: 2024-01-12 10:41:46
+"Last Modified: 2024-01-12 14:46:31
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1093,7 +1093,9 @@ if exists("+syntax")
         "主题默认设置
         colorscheme torte
     else
-        if v:version < 900
+        if has("nvim")
+            colorscheme torte
+        elseif v:version < 900
             colorscheme desert
         else
             colorscheme torte
