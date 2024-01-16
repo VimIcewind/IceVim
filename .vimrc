@@ -1,4 +1,4 @@
-"Last Modified: 2024-01-12 14:46:31
+"Last Modified: 2024-01-16 17:08:56
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -1377,6 +1377,8 @@ let g:user_emmet_leader_key = '<C-j>'
 let g:js_indent_log = 0
 
 "------------------gutentags设置------------------
+"如果vim gutentags linux报错 gutentags: ctags job failed, returned: 122
+"chmod 500 ~/.vim/plugged/vim-gutentags/plat/unix/*.sh
 "是否启用gutentags
 let g:gutentags_enabled = 1
 "是否显示调试信息
