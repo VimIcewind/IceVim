@@ -1,4 +1,4 @@
-"Last Modified: 2024-01-16 17:08:56
+"Last Modified: 2024-01-20 12:04:30
 
 "当由Vim修改本文件保存时，自动更新本文件的修改日期
 au BufWritePre .vimrc norm mVMmmggf2C=strftime("%Y-%m-%d %H:%M:%S")'m`V
@@ -789,6 +789,12 @@ func! RunRuby()
     exec "!ruby %"
 endfunc
 
+"运行lua源文件
+func! RunLua()
+    exec "update"
+    exec "!lua %"
+endfunc
+
 "运行typescript源文件
 func! RunTS()
     exec "update"
@@ -983,6 +989,8 @@ func! RunResult()
         exec "!python %"
     elseif &filetype == "ruby"
         exec "!ruby %"
+    elseif &filetype == "lua"
+        exec "call RunLua()"
     elseif &filetype == "make"
         exec "normal gg/:<CR>:noh<CR>b"|exec '!' . expand('<cfile>')
     elseif &filetype == "html"
@@ -1180,7 +1188,7 @@ endfunc
 "编辑一个文件时，直接用相应的键盘映射
 if has("autocmd")
     autocmd FileType c,cpp,objc,java,cs,scala,go,rust,asm,make call MAP()
-    autocmd FileType python,perl,ruby,php,typescript,javascript call MAP()
+    autocmd FileType python,perl,ruby,lua,php,typescript,javascript call MAP()
     autocmd FileType htm,html,xhtml,xml call MAP()
     autocmd FileType vim,lisp,scheme,tex,latex call MAP()
 endif
